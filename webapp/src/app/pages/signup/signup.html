@@ -1,0 +1,91 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button slot="start">
+      <ion-back-button [defaultHref]="defaultHref"></ion-back-button>
+    </ion-button>
+    <ion-title>Sign up</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="SignUpForm">
+    <ion-grid class="main-grid">
+      <ion-row class="ion-text-center">
+        <ion-col
+          class="ion-text-center"
+          size-lg="4"
+          offset-lg="4"
+          class="login-box"
+        >
+          <span class="app-name-main">Create Web App Account</span>
+          <br />
+          <ion-item>
+            <ion-label position="floating">Name</ion-label>
+            <ion-input placeholder="FIRSTNAME MIDDLEAME LASTNAME" class="text-uppercase" inputmode="text" formControlName="name"></ion-input>
+          </ion-item>
+          <div *ngFor="let validation of validation_messages.name">
+            <ng-container
+              *ngIf="(isSubmitted && SignUpForm.get('name')?.hasError(validation.type)) || (SignUpForm.get('name')?.hasError(validation.type) && (SignUpForm.get('name')?.dirty || SignUpForm.get('name')?.touched))">
+              <small class="text-danger">{{ validation.message }}</small>
+            </ng-container>
+          </div>
+
+          <ion-item>
+            <ion-label position="floating">Mobile Number</ion-label>
+            <ion-input placeholder="09061234567" inputmode="number" formControlName="mobileno"></ion-input>
+          </ion-item>
+          <div *ngFor="let validation of validation_messages.mobileno">
+            <ng-container
+              *ngIf="(isSubmitted && SignUpForm.get('mobileno')?.hasError(validation.type)) || (SignUpForm.get('mobileno')?.hasError(validation.type) && (SignUpForm.get('mobileno')?.dirty || SignUpForm.get('mobileno')?.touched))">
+              <small class="text-danger">{{ validation.message }}</small>
+            </ng-container>
+          </div>
+          <ion-item>
+            <ion-label position="floating">Email</ion-label>
+            <ion-input placeholder="test@test.com" inputmode="email" formControlName="email"></ion-input>
+          </ion-item>
+          <div *ngFor="let validation of validation_messages.email">
+            <ng-container
+              *ngIf="(isSubmitted && SignUpForm.get('email')?.hasError(validation.type)) || (SignUpForm.get('email')?.hasError(validation.type) && (SignUpForm.get('email')?.dirty || SignUpForm.get('email')?.touched))">
+              <small class="text-danger">{{ validation.message }}</small>
+            </ng-container>
+          </div>
+
+          <ion-item>
+            <ion-label position="floating">Password</ion-label>
+            <ion-input type="password" inputmode="password" formControlName="password"></ion-input>
+          </ion-item>
+          <div *ngFor="let validation of validation_messages.password">
+            <ng-container
+              *ngIf="(isSubmitted && SignUpForm.get('password')?.hasError(validation.type)) || (SignUpForm.get('password')?.hasError(validation.type) && (SignUpForm.get('password')?.dirty || SignUpForm.get('password')?.touched))">
+              <small class="text-danger">{{ validation.message }}</small>
+            </ng-container>
+          </div>
+
+          <ion-item>
+            <ion-label position="floating">Password Confirm</ion-label>
+            <ion-input type="password" inputmode="password" formControlName="passwordconfirm"></ion-input>
+          </ion-item>
+          <div *ngFor="let validation of validation_messages.passwordconfirm">
+            <ng-container
+              *ngIf="(isSubmitted && SignUpForm.get('passwordconfirm')?.hasError(validation.type)) || (SignUpForm.get('passwordconfirm')?.hasError(validation.type) && (SignUpForm.get('passwordconfirm')?.dirty || SignUpForm.get('passwordconfirm')?.touched))">
+              <small class="text-danger">{{ validation.message }}</small>
+            </ng-container>
+          </div>
+
+          <ion-button
+            (click)="onSignup()"
+            type="submit"
+            expand="block"
+            >Create</ion-button
+          >
+          <ion-button 
+          (click)="onGoogleSignUp()"
+          expand="block"
+          >Google Signup</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+  
+</ion-content>

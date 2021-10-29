@@ -1,0 +1,301 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>My Account </ion-title>
+    <!-- <ion-buttons slot="start">
+      <ion-button *ngIf="!isbeginning" (click)="prev()">
+        <ion-icon slot="start" name="arrow-back"></ion-icon> Prev
+      </ion-button>
+      <ion-button *ngIf="isbeginning">
+        <ion-back-button [defaultHref]="defaultHref"></ion-back-button>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button *ngIf="!isend" (click)="next()">Next <ion-icon slot="end" name="arrow-forward"></ion-icon>
+      </ion-button>
+      <ion-button *ngIf="isend && ispolicyagree" (click)="save()">Save <ion-icon slot="end" name="save"></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+  </ion-toolbar>
+
+  <!-- <ion-toolbar *ngIf="!allowcreate">
+    <ion-title>QR LIMIT EXCEEDED</ion-title>
+  </ion-toolbar> -->
+</ion-header>
+<ion-content class="ion-padding">
+  <ion-card class="card card-primary card-outline">
+    <div class="card-body box-profile">
+      <div class="text-center">
+        <img
+          class="profile-user-img img-fluid img-circle"
+          src="{{user?.photo}}"
+          alt="User profile picture"
+        />
+      </div>
+
+      <h3 class="profile-username text-center">{{user.email}}</h3>
+      <h3 class="profile-username text-center">{{user.mobileno}}</h3>
+      <ul class="list-group list-group-unbordered mb-3">
+        <ion-item (click)="printQR(user)" class="centeritem breakword">
+          <ion-label>
+            <div class="breakword">
+              <h3>{{user?.name}}</h3>
+            </div>
+            <div id="{{user?.id}}">
+              <ngx-qrcode
+                [elementType]="elementType"
+                [value]="user?.qrdata | json"
+                [width]="250"
+                errorCorrectionLevel="L"
+              >
+              </ngx-qrcode>
+            </div>
+          </ion-label>
+        </ion-item>
+      </ul>
+      <ion-button (click)="changePassword()" color="primary" expand="block"
+        >Change Password</ion-button
+      >
+    </div>
+    <!-- /.card-body -->
+  </ion-card>
+  <form [formGroup]="personInformationForm">
+    <!-- {{personInformationForm.value | json}} -->
+    <ion-toolbar color="primary">
+      <nav class="navbar navbar-expand navbar-primary navbar-dark">
+        <ion-title>Personal Information</ion-title>
+      </nav>
+    </ion-toolbar>
+    <ion-item>
+      <ion-label position="floating">Last Name</ion-label>
+      <ion-input
+        class="text-uppercase"
+        oninput="this.value = this.value.toUpperCase()"
+        inputmode="text"
+        formControlName="lastname"
+      ></ion-input>
+    </ion-item>
+    <div *ngFor="let validation of validation_messages.lastname">
+      <ng-container
+        *ngIf="(isSubmitted && personInformationForm.get('lastname')?.hasError(validation.type)) || (personInformationForm.get('lastname')?.hasError(validation.type) && (personInformationForm.get('lastname')?.dirty || personInformationForm.get('lastname')?.touched))"
+      >
+        <small class="text-danger">{{ validation.message }}</small>
+      </ng-container>
+    </div>
+    <ion-item>
+      <ion-label position="floating">First Name</ion-label>
+      <ion-input
+        class="text-uppercase"
+        oninput="this.value = this.value.toUpperCase()"
+        inputmode="text"
+        formControlName="firstname"
+      ></ion-input>
+    </ion-item>
+    <div *ngFor="let validation of validation_messages.firstname">
+      <ng-container
+        *ngIf="(isSubmitted && personInformationForm.get('firstname')?.hasError(validation.type)) || (personInformationForm.get('firstname')?.hasError(validation.type) && (personInformationForm.get('firstname')?.dirty || personInformationForm.get('firstname')?.touched))"
+      >
+        <small class="text-danger">{{ validation.message }}</small>
+      </ng-container>
+    </div>
+
+    <ion-item>
+      <ion-label position="floating">Middle Name</ion-label>
+      <ion-input
+        class="text-uppercase"
+        oninput="this.value = this.value.toUpperCase()"
+        inputmode="text"
+        formControlName="middlename"
+      ></ion-input>
+    </ion-item>
+    <div *ngFor="let validation of validation_messages.middlename">
+      <ng-container
+        *ngIf="(isSubmitted && personInformationForm.get('middlename')?.hasError(validation.type)) || (personInformationForm.get('middlename')?.hasError(validation.type) && (personInformationForm.get('middlename')?.dirty || personInformationForm.get('middlename')?.touched))"
+      >
+        <small class="text-danger">{{ validation.message }}</small>
+      </ng-container>
+    </div>
+
+    <ion-item>
+      <ion-label position="floating">Name Extension</ion-label>
+      <ion-input
+        class="text-uppercase"
+        oninput="this.value = this.value.toUpperCase()"
+        inputmode="text"
+        formControlName="nameextension"
+      ></ion-input>
+    </ion-item>
+    <div *ngFor="let validation of validation_messages.nameextension">
+      <ng-container
+        *ngIf="(isSubmitted && personInformationForm.get('nameextension')?.hasError(validation.type)) || (personInformationForm.get('nameextension')?.hasError(validation.type) && (personInformationForm.get('nameextension')?.dirty || personInformationForm.get('nameextension')?.touched))"
+      >
+        <small class="text-danger">{{ validation.message }}</small>
+      </ng-container>
+    </div>
+
+    <ion-item>
+      <ion-label position="floating">Birth Date</ion-label>
+      <ion-datetime
+        displayFormat="MM/DD/YYYY"
+        formControlName="birthdate"
+        placeholder="Select Date"
+      >
+      </ion-datetime>
+    </ion-item>
+    <div *ngFor="let validation of validation_messages.birthdate">
+      <ng-container
+        *ngIf="(isSubmitted && personInformationForm.get('birthdate')?.hasError(validation.type)) || (personInformationForm.get('birthdate')?.hasError(validation.type) && (personInformationForm.get('birthdate')?.dirty || personInformationForm.get('birthdate')?.touched))"
+      >
+        <small class="text-danger">{{ validation.message }}</small>
+      </ng-container>
+    </div>
+
+    <ion-item>
+      <ion-label position="floating">Gender</ion-label>
+      <ion-select placeholder="Select One" formControlName="gender">
+        <ion-select-option value="F">Female</ion-select-option>
+        <ion-select-option value="M">Male</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <div *ngFor="let validation of validation_messages.gender">
+      <ng-container
+        *ngIf="(isSubmitted && personInformationForm.get('gender')?.hasError(validation.type)) || (personInformationForm.get('gender')?.hasError(validation.type) && (personInformationForm.get('gender')?.dirty || personInformationForm.get('gender')?.touched))"
+      >
+        <small class="text-danger">{{ validation.message }}</small>
+      </ng-container>
+    </div>
+
+    <ion-item>
+      <ion-label position="floating">Civil Status</ion-label>
+      <ion-select placeholder="Select One" formControlName="civilstatus">
+        <ion-select-option value="SINGLE">SINGLE</ion-select-option>
+        <ion-select-option value="MARRIED">MARRIED</ion-select-option>
+        <ion-select-option value="COUPLE">COUPLE</ion-select-option>
+        <ion-select-option value="SEPARATED">SEPARATED</ion-select-option>
+        <ion-select-option value="WIDOW">WIDOW/WIDOWER</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <div *ngFor="let validation of validation_messages.civilstatus">
+      <ng-container
+        *ngIf="(isSubmitted && personInformationForm.get('civilstatus')?.hasError(validation.type)) || (personInformationForm.get('civilstatus')?.hasError(validation.type) && (personInformationForm.get('civilstatus')?.dirty || personInformationForm.get('civilstatus')?.touched))"
+      >
+        <small class="text-danger">{{ validation.message }}</small>
+      </ng-container>
+    </div>
+
+    <ion-toolbar color="primary">
+      <nav class="navbar navbar-expand navbar-primary navbar-dark">
+        <ion-title>Address</ion-title>
+      </nav>
+    </ion-toolbar>
+
+    <div formGroupName="region">
+      <ion-item>
+        <ion-label position="floating">Region</ion-label>
+        <ion-select
+          placeholder="Select One"
+          formControlName="code"
+          (ionChange)="onRegionChange()"
+        >
+          <ion-select-option
+            *ngFor="let region of regions"
+            value="{{region.code}}"
+            >{{region.name}}</ion-select-option
+          >
+        </ion-select>
+      </ion-item>
+      <div *ngFor="let validation of validation_messages.region">
+        <ng-container
+          *ngIf="(isSubmitted && personInformationForm.get('region.code')?.hasError(validation.type)) || (personInformationForm.get('region.code')?.hasError(validation.type) && (personInformationForm.get('region.code')?.dirty || personInformationForm.get('region.code')?.touched))"
+        >
+          <small class="text-danger">{{ validation.message }}</small>
+        </ng-container>
+      </div>
+    </div>
+    <div formGroupName="province">
+      <ion-item>
+        <ion-label position="floating">Province</ion-label>
+        <ion-select
+          placeholder="Select One"
+          formControlName="code"
+          (ionChange)="onProvinceChange()"
+        >
+          <ion-select-option
+            *ngFor="let province of provinces"
+            value="{{province.code}}"
+            >{{province.name}}</ion-select-option
+          >
+        </ion-select>
+      </ion-item>
+      <div *ngFor="let validation of validation_messages.province">
+        <ng-container
+          *ngIf="(isSubmitted && personInformationForm.get('province.code')?.hasError(validation.type)) || (personInformationForm.get('province.code')?.hasError(validation.type) && (personInformationForm.get('province.code')?.dirty || personInformationForm.get('province.code')?.touched))"
+        >
+          <small class="text-danger">{{ validation.message }}</small>
+        </ng-container>
+      </div>
+    </div>
+    <div formGroupName="municipality">
+      <ion-item>
+        <ion-label position="floating">Municipality/City</ion-label>
+        <ion-select
+          placeholder="Select One"
+          formControlName="code"
+          (ionChange)="onMunicipalityChange()"
+        >
+          <ion-select-option
+            *ngFor="let municipality of municipalities"
+            value="{{municipality.code}}"
+            >{{municipality.name}}</ion-select-option
+          >
+        </ion-select>
+      </ion-item>
+      <div *ngFor="let validation of validation_messages.municipality">
+        <ng-container
+          *ngIf="(isSubmitted && personInformationForm.get('municipality.code')?.hasError(validation.type)) || (personInformationForm.get('municipality.code')?.hasError(validation.type) && (personInformationForm.get('municipality.code')?.dirty || personInformationForm.get('municipality.code')?.touched))"
+        >
+          <small class="text-danger">{{ validation.message }}</small>
+        </ng-container>
+      </div>
+    </div>
+    <div formGroupName="barangay">
+      <ion-item>
+        <ion-label position="floating">Barangay</ion-label>
+        <ion-select placeholder="Select One" formControlName="code">
+          <ion-select-option
+            *ngFor="let barangay of barangays"
+            value="{{barangay.code}}"
+            >{{barangay.name}}</ion-select-option
+          >
+        </ion-select>
+      </ion-item>
+      <div *ngFor="let validation of validation_messages.barangay">
+        <ng-container
+          *ngIf="(isSubmitted && personInformationForm.get('barangay.code')?.hasError(validation.type)) || (personInformationForm.get('barangay.code')?.hasError(validation.type) && (personInformationForm.get('barangay.code')?.dirty || personInformationForm.get('barangay.code')?.touched))"
+        >
+          <small class="text-danger">{{ validation.message }}</small>
+        </ng-container>
+      </div>
+    </div>
+    <ion-item>
+      <ion-label position="floating">Street/Purok</ion-label>
+      <ion-input
+        class="text-uppercase"
+        oninput="this.value = this.value.toUpperCase()"
+        inputmode="text"
+        formControlName="street"
+      ></ion-input>
+    </ion-item>
+    <div *ngFor="let validation of validation_messages.street">
+      <ng-container
+        *ngIf="(isSubmitted && personInformationForm.get('street')?.hasError(validation.type)) || (personInformationForm.get('street')?.hasError(validation.type) && (personInformationForm.get('street')?.dirty || personInformationForm.get('street')?.touched))"
+      >
+        <small class="text-danger">{{ validation.message }}</small>
+      </ng-container>
+    </div>
+    <button type="button" class="btn-block btn-success btn-lg" (click)="onSave()">Save</button>
+    <p>&nbsp;</p>
+  </form>
+</ion-content>

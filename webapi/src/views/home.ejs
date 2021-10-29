@@ -1,0 +1,18 @@
+<%- include('header') %>
+
+<section class="jumbotron container mt-5">
+<% if (!user) { %>
+	<h1>Welcome!</h1> 
+	<!-- <form method="POST" action="/login">
+		Email:<input type="text" name="email" /><br/>
+		Password:<input type="password" name="password" /><br/>
+		<input type="submit" value="Submit"/>
+	</form> -->
+	<p class="mt-5"><a href="/login/google" class="loginBtn loginBtn--google">Login with Google</a></p>
+<% } else { %>
+	<h1>Hello, <%= user.name %></h1>
+	<p class="mt-5"><a href="/logout" class="btn btn-primary">Logout</a></p>
+<% } %>
+</section>
+
+<%- include('footer') %>

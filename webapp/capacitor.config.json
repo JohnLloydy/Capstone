@@ -1,0 +1,33 @@
+{
+    "appId": "io.ionic.starter",
+    "appName": "ionic-conference-app",
+    "bundledWebRuntime": false,
+    "npmClient": "npm",
+    "webDir": "www",
+    "plugins": {
+      "SplashScreen": {
+        "launchShowDuration": 0
+      },
+      "GoogleAuth": {
+        "scopes": [
+          "profile",
+          "email"
+        ],
+        "serverClientId": "480025926694-6nget66392vt1ga3b4pg84pecplu501t.apps.googleusercontent.com",
+        "forceCodeForRefreshToken": true
+      }
+    },
+    "cordova": {
+      "preferences": {
+        "ScrollEnabled": "false",
+        "android-minSdkVersion": "19",
+        "BackupWebStorage": "none",
+        "SplashMaintainAspectRatio": "true",
+        "FadeSplashScreenDuration": "300",
+        "SplashShowOnlyFirstTime": "false",
+        "SplashScreen": "screen",
+        "SplashScreenDelay": "3000"
+      }
+    }
+  }
+  
