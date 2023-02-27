@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastController, AlertController, LoadingController } from '@ionic/angular';
 import { Observable } from 'rxjs';
@@ -18,7 +18,7 @@ export class UserPage {
   provinces: any[];
   municipalities: any[];
   barangays: any[];
-  userForm: FormGroup;
+  userForm: UntypedFormGroup;
   validation_messages: any;
   mode: string;
   isSubmitted: boolean;
@@ -35,7 +35,7 @@ export class UserPage {
   constructor(
     private userService: UserService,
     private route: ActivatedRoute,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private toastController: ToastController,
     private router: Router,
     private roleService: RoleService,
@@ -393,7 +393,7 @@ export class UserPage {
   }
 
   pwdConfirming(key: string, confirmationKey: string) {
-    return (group: FormGroup) => {
+    return (group: UntypedFormGroup) => {
       const input = group.controls[key];
       const confirmationInput = group.controls[confirmationKey];
       return confirmationInput.setErrors(

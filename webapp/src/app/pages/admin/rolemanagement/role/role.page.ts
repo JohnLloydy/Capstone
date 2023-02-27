@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastController, AlertController } from '@ionic/angular';
 import { RoleService } from '../../../../services/role.service';
@@ -11,7 +11,7 @@ import { RoleService } from '../../../../services/role.service';
   styleUrls: ['./role.page.scss'],
 })
 export class RolePage {
-  roleForm: FormGroup;
+  roleForm: UntypedFormGroup;
   validation_messages: any;
   mode: string;
   isSubmitted: boolean;
@@ -22,7 +22,7 @@ export class RolePage {
 
   constructor(
     private route: ActivatedRoute,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private toastController: ToastController,
     private router: Router,
     private roleService: RoleService,

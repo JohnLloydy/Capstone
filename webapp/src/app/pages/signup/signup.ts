@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NgForm, Validators, FormBuilder, ValidationErrors, AbstractControl, FormGroup } from '@angular/forms';
+import { NgForm, Validators, UntypedFormBuilder, ValidationErrors, AbstractControl, UntypedFormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { UserData } from '../../providers/user-data';
@@ -18,7 +18,7 @@ import { MenuController } from '@ionic/angular';
 })
 export class SignupPage {
   defaultHref: string;
-  public SignUpForm: FormGroup;
+  public SignUpForm: UntypedFormGroup;
   public validation_messages: any;
   public isSubmitted: boolean = false;
 
@@ -28,7 +28,7 @@ export class SignupPage {
     public userData: UserData,
     public authService: AuthService,
     public menu: MenuController,
-    private formBuilder: FormBuilder
+    private formBuilder: UntypedFormBuilder
   ) {
 
     this.SignUpForm = this.formBuilder.group({

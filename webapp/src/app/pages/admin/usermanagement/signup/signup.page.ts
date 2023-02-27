@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController, LoadingController, ToastController } from '@ionic/angular';
 import { Observable } from 'rxjs';
@@ -19,7 +19,7 @@ export class SignupPage {
   provinces: any[];
   municipalities: any[];
   barangays: any[];
-  public userForm: FormGroup;
+  public userForm: UntypedFormGroup;
   public validation_messages: any;
   public isSubmitted: boolean = false;
   loading: HTMLIonLoadingElement = null;
@@ -27,7 +27,7 @@ export class SignupPage {
   constructor(
     private userService: UserService,
     private route: ActivatedRoute,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private toastController: ToastController,
     private router: Router,
     private roleService: RoleService,

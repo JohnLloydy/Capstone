@@ -5,7 +5,7 @@ import { Component, OnInit } from "@angular/core";
 import { AuthService } from "../../services/auth.service";
 import { skip } from 'rxjs/operators';
 import { AppconfigService } from '../../services/appconfig.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import * as moment from 'moment';
@@ -31,7 +31,7 @@ export class MyaccountPage implements OnInit {
 
 
 
-  public personInformationForm: FormGroup;
+  public personInformationForm: UntypedFormGroup;
 
   // public submitAttempt: boolean = false;
   public isend: boolean = false;
@@ -65,7 +65,7 @@ export class MyaccountPage implements OnInit {
     private appConfig: AppconfigService,
     private alertController: AlertController,
     private userService: UserService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private httpClient: HttpClient,
     private loadingController: LoadingController,
     private toastController: ToastController,
