@@ -121,7 +121,7 @@ export class AppComponent implements OnInit {
       this.authService.authenticationState.pipe(skip(1)).subscribe(state => {
         if (state) {
 
-          // this.router.navigate(['sportscatalogue']);
+         
           this.menu.enable(true);
         } else {
           // console.log("NO AUTH");
