@@ -1,7 +1,7 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.ionic.webapp',
+  appId: 'io.ionic.starter',
   appName: 'webapp',
   webDir: 'www',
   bundledWebRuntime: false
