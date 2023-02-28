@@ -22,6 +22,7 @@ const client = new OAuth2Client({
   clientId: GOOGLE_CLIENT_ID,
 });
 
+
 // async function verify(token) {
 //   const ticket = await client.verifyIdToken({
 //     idToken: token,
@@ -73,6 +74,17 @@ class UserController extends CRUDController {
   constructor(model) {
     super(model);
   }
+
+  getAll = async (req, res) => {
+    try {
+        const items = await this.model.findAll({
+            include: Role
+        });
+        return res.status(200).json(items);
+    } catch (error) {
+        return res.status(500).send(error.message);
+    }
+  };
 
   getuserprofilebyid = async (req, res) => {
     try {
