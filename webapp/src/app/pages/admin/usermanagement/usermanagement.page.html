@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>User Management</ion-title>
+    <ion-buttons slot="end">
+      <a class="btn btn-primary btn-sm" (click)="onSignup()">
+        <i class="fas fa-plus">
+        </i>
+        Register New User
+      </a>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="ion-padding">
+<!--     
+    <ngx-datatable
+      class="dark"
+      [limit]="8"
+      [rows]="rows"
+      [rowHeight]="50"
+      [columns]="columns"
+      [columnMode]="'force'"
+      [sortType]="'multi'"
+      [headerHeight]="50"
+      [footerHeight]="50"
+      [scrollbarH]="true"
+      [selected]="selected"
+      [selectionType]="'single'"
+      (select)="onSelect($event)"
+    >
+
+      <ngx-datatable-column *ngFor="let column of columns; let i = index;" name="{{column.name}}"
+        prop="{{column.prop}}" [width]="column.width">
+       <ng-template let-value="value" let-row="row"  ngx-datatable-cell-template>
+          
+
+          <span *ngIf="column.prop === 'screenshot';else others"><img [src]="value" width="300" /></span>
+          <ng-template #others>{{(column.prop === 'createdAt' ) ? (row.createdAt | date) : value}}</ng-template>
+       </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable> -->
+  </div>
+</ion-content>
