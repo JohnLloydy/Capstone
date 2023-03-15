@@ -30,7 +30,7 @@ export class UsermanagementPage {
     });
   }
 
-  onSelect({ selected }) {
+  onSelect() {
     this.router.navigate(['usermanagement/user',this.selected[0].id]);
   }
 

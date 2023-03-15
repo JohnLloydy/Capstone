@@ -1,5 +1,5 @@
 var CRUDController = require('../controllers/crudcontroller');
-const Role = require("../../models/role");
+const Role = require("../models/role");
 class RolesController extends CRUDController {
   constructor(model) {
     super(model);

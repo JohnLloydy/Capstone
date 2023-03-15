@@ -51,7 +51,7 @@ export class AppconfigService {
 
  
 
-  async showToast(msg) {
+  async showToast(msg :  any) {
     const toast = await this.toastController.create({
       message: msg,
       duration: 2000,

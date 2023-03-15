@@ -8,7 +8,7 @@ export class A2hsService {
 
   promptIntercepted = false;
   isStandalone = false;
-  deferredPrompt;
+  deferredPrompt: any;
   userInstalled = false;
   whereIsShare = 'bottom';
 
@@ -107,7 +107,7 @@ export class A2hsService {
 
     // Wait for the user to respond to the prompt
     this.deferredPrompt.userChoice
-      .then((choiceResult) => {
+      .then((choiceResult:any) => {
 
         if (choiceResult.outcome === 'accepted') {
             // no matter the outcome, the prompt cannot be reused ON MOBILE

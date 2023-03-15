@@ -26,34 +26,207 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 
-@import '~admin-lte/plugins/fontawesome-free/css/all.min.css';
+@import '/node_modules/admin-lte/plugins/fontawesome-free/css/all.min.css';
 @import url('https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css');
-@import '~admin-lte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css';
-@import '~admin-lte/plugins/icheck-bootstrap/icheck-bootstrap.min.css';
-@import '~admin-lte/plugins/jqvmap/jqvmap.min.css';
-@import '~admin-lte/dist/css/adminlte.min.css';
-@import '~admin-lte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css';
-@import '~admin-lte/plugins/daterangepicker/daterangepicker.css';
-@import '~admin-lte/plugins/summernote/summernote-bs4.css';
+@import '/node_modules/admin-lte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css';
+@import '/node_modules/admin-lte/plugins/icheck-bootstrap/icheck-bootstrap.min.css';
+@import '/node_modules/admin-lte/plugins/jqvmap/jqvmap.min.css';
+@import '/node_modules/admin-lte/dist/css/adminlte.min.css';
+@import '/node_modules/admin-lte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css';
+@import '/node_modules/admin-lte/plugins/daterangepicker/daterangepicker.css';
+@import '/node_modules/admin-lte/plugins/summernote/summernote-bs4.css';
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700');
-@import '~ol/ol.css';
+@import '/node_modules/ol/ol.css';
 
-// @import '~@swimlane/ngx-datatable/index.css';
-// @import '~@swimlane/ngx-datatable/themes/material.scss';
-// @import '~@swimlane/ngx-datatable/assets/icons.css';
+@import '/node_modules/@swimlane/ngx-datatable/index.css';
+@import '/node_modules/@swimlane/ngx-datatable/themes/material.scss';
+@import '/node_modules/@swimlane/ngx-datatable/assets/icons.css';
 
-// @import '~@swimlane/ngx-datatable/index.css';
-// @import '~@swimlane/ngx-datatable/themes/dark.css';
-// @import '~@swimlane/ngx-datatable/themes/material.css';
-// @import '~@swimlane/ngx-datatable/themes/bootstrap.css';
-// @import '~@swimlane/ngx-datatable/assets/icons.css';
+@import '/node_modules/@swimlane/ngx-datatable/index.css';
+@import '/node_modules/@swimlane/ngx-datatable/themes/dark.css';
+@import '/node_modules/@swimlane/ngx-datatable/themes/material.css';
+@import '/node_modules/@swimlane/ngx-datatable/themes/bootstrap.css';
+@import '/node_modules/@swimlane/ngx-datatable/assets/icons.css';
+
+
 // Applies a text wrap on ion options
 .alert-tappable.alert-radio {
-    height: auto;
-    contain: content;
+  height: auto;
+  contain: content;
 }
 
 .alert-radio-label.sc-ion-alert-md,
 .alert-radio-label.sc-ion-alert-ios {
-    white-space: normal;
+  white-space: normal;
+}
+
+
+
+// mat-input {
+//     vertical-align: middle;
+// }
+
+// mat-input, mat-radio-button {
+//     margin-right: 1rem;
+// }
+
+// mat-select {
+//     width: 200px;
+// }
+
+// mat-slide-toggle {
+//     display: inline-block !important;
+// }
+
+mat-form-field {
+  width: 100%;
+}
+
+// dynamic-material-form-control {
+//   // display: block;
+//   // margin-bottom: 1rem;
+//   min-width: 150px;
+//   max-width: 500px;
+//   width: 100%;
+
+// }
+
+// dynamic-material-form-control div[role="group"] > dynamic-material-form-control {
+//   display: inline-block;
+//   margin-bottom: 0;
+//   margin-right: 1rem;
+// }
+
+// dynamic-material-form-control dynamic-material-form-group + mat-error {
+//   font-size: 75%;
+// }
+
+// dynamic-material-form-control .mat-list-item {
+//   justify-content: center;
+// }
+
+// .test-class-green {
+//   background-color: green !important;
+//   width: 80% !important;
+//   margin: auto;
+//   color: green !important;
+// }
+
+// .test-class-blue {
+//   background-color: rgba(63, 127, 191, 0.52) !important;
+//   width: 100% !important;
+//   margin: auto;
+// }
+
+// .test-class-yellow {
+//   background-color: rgba(191, 191, 63, 0.52) !important;
+//   width: 80% !important;
+//   margin: auto;
+// }
+
+// @mixin form-field-styles($color, $width: 100%) {
+//   .mat-form-field {
+//     width: $width !important;
+//     margin: auto;
+//     background-color: $color !important;
+//   }
+// }
+
+// .test-class-yellow {
+//   @include form-field-styles(rgba(191, 191, 63, 0.52), 80%);
+//   margin: auto;
+// }
+
+// .test-class-blue {
+//   @include form-field-styles(rgba(63, 127, 191, 0.52));
+//   margin: auto;
+// }
+// .test-class-green {
+//   @include form-field-styles(green, 80%);
+//   margin: auto;
+// }
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+ 
+@media print {
+
+  ion-header, ion-backdrop, .tabbar, ion-footer, ion-content::part(background) {
+    display: none !important;
+  }
+  ion-nav {
+    contain: none;
+    overflow: visible;
+  }
+  ion-split-pane {
+    display: block;
+  }
+  .scroll-content,
+  ion-modal,
+  ion-modal .modal-wrapper,
+  ion-modal .ion-page,
+  ion-modal .ion-page > ion-content,
+  .ion-page,
+  .ion-page > ion-content,
+  ion-split-pane,
+  ion-tab,
+  ion-tabs,
+  ion-router-outlet,
+  .app-root,
+  ion-content::part(scroll),
+  body {
+    contain: none;
+    position: initial;
+    height: auto;
+    overflow: visible;
+  }
+  .fixed-content, .scroll-content {
+    margin-top: 0 !important;
+  }
+}
+
+.ngx-datatable.fixed-header .datatable-header .datatable-header-inner .datatable-header-cell {
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: normal !important;
+  text-align: center !important;
+  vertical-align: middle !important;
+}  
+.display-flex {
+  display: flex;
+}
+  .flex-1 {
+  flex: 1;
+}
+  .flex-2 {
+  flex: 2;
+}
+  .flex-3 {
+  flex: 3;
+}
+  .flex-4 {
+  flex: 4;
+}
+  .flex-5 {
+  flex: 5;
+}
+  .flex-6 {
+  flex: 6;
+}
+  [class*='flex-'] {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+  [class*='flex-']:first-child {
+  padding-left: 0;
+}
+  [class*='flex-']:nth-last-child(2) {
+  padding-right: 0;
 }

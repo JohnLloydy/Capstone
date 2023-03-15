@@ -55,7 +55,7 @@ export class SignupPage {
       passwordconfirm: [undefined,
         [
           Validators.required,
-          this.matchValues('password'),
+          // this.matchValues('password'),
         ],
       ],
     });
@@ -91,8 +91,8 @@ export class SignupPage {
       ]
     };
 
-    this.SignUpForm.controls.password.valueChanges.subscribe(() => {
-      this.SignUpForm.controls.passwordconfirm.updateValueAndValidity();
+    this.SignUpForm.controls['password'].valueChanges.subscribe(() => {
+      this.SignUpForm.controls['passwordconfirm'].updateValueAndValidity();
     });
 
     this.defaultHref =
@@ -131,17 +131,17 @@ export class SignupPage {
     });
   }
 
-  matchValues(
-    matchTo: string // name of the control to match to
-  ): (AbstractControl) => ValidationErrors | null {
-    return (control: AbstractControl): ValidationErrors | null => {
-      return !!control.parent &&
-        !!control.parent.value &&
-        control.value === control.parent.controls[matchTo].value
-        ? null
-        : { isMatching: true };
-    };
-  }
+  // matchValues(
+  //   matchTo: string // name of the control to match to
+  // ): (arg0: AbstractControl) => ValidationErrors | null {
+  //   return (control: AbstractControl): ValidationErrors | null => {
+  //     return !!control.parent &&
+  //       !!control.parent.value &&
+  //       control.value === control.parent.controls[matchTo].value
+  //       ? null
+  //       : { isMatching: true };
+  //   };
+  // }
 
   ionViewDidEnter() {
     // GoogleAuth.init();

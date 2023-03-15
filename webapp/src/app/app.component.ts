@@ -171,7 +171,7 @@ export class AppComponent implements OnInit {
     this.router.navigateByUrl('/tutorial');
   }
 
-  checkRoles(roles) {
+  checkRoles(roles: any) {
     return this.authService.checkRoles(roles);
   }
 

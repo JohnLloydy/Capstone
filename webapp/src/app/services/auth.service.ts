@@ -49,7 +49,7 @@ export class AuthService {
     });
   }
 
-  signup(credentials) {
+  signup(credentials : any) {
     return this.http
       .post(`${environment.backend}/api/register`, credentials)
       .pipe(
@@ -70,7 +70,7 @@ export class AuthService {
 
   
 
-  login(credentials) {
+  login(credentials : any) {
     return this.http
       .post(`${environment.backend}/api/login`, credentials)
       .pipe(
@@ -105,15 +105,15 @@ export class AuthService {
     return await this.authenticationState.value;
   }
 
-  checkRoles(roles) {
+  checkRoles(roles: any) {
     if (roles.includes(this.user?.role.name.toLowerCase())) {
       return true;
     }
     return false;
   }
 
-  hasRoles(roles: string[]): boolean {
-    if (this.isAuthenticated()) {
+  async hasRoles(roles: string[]): Promise<boolean> {
+    if (await this.isAuthenticated()) {
       if (this.checkRoles(roles)) {
         return true;
       }

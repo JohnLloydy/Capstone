@@ -89,7 +89,7 @@ export class CrudService<T> {
     return [this.apiUrl, id].join('/');
   }
 
-  async showToast(msg) {
+  async showToast(msg: any) {
     const toast = await this.toastController.create({
       message: msg,
       duration: 2000,

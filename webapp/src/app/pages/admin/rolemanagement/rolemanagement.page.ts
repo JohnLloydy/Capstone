@@ -33,7 +33,7 @@ export class RolemanagementPage{
     });
   }
 
-  onSelect({ selected }) {
+  onSelect() {
     this.router.navigate(['rolemanagement/role',this.selected[0].id]);
     // console.log('Select Event', selected, this.selected);
   }

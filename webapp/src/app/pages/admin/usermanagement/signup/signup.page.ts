@@ -15,14 +15,14 @@ import { UserService } from '../../../../services/user.service';
 })
 export class SignupPage {
   defaultHref: string;
-  regions: any[];
-  provinces: any[];
-  municipalities: any[];
-  barangays: any[];
+  regions: any[]| undefined;
+  provinces: any[]| undefined;
+  municipalities: any[]| undefined;
+  barangays: any[] | undefined;
   public userForm: UntypedFormGroup;
   public validation_messages: any;
   public isSubmitted: boolean = false;
-  loading: HTMLIonLoadingElement = null;
+  loading: HTMLIonLoadingElement | undefined;
 
   constructor(
     private userService: UserService,
@@ -57,7 +57,7 @@ export class SignupPage {
       passwordconfirm: [undefined,
         [
           Validators.required,
-          this.matchValues('password'),
+          // this.matchValues('password'),
         ],
       ],
       lastname: [
@@ -211,8 +211,8 @@ export class SignupPage {
       ]
     };
 
-    this.userForm.controls.password.valueChanges.subscribe(() => {
-      this.userForm.controls.passwordconfirm.updateValueAndValidity();
+    this.userForm.controls['password'].valueChanges.subscribe(() => {
+      this.userForm.controls['passwordconfirm'].updateValueAndValidity();
     });
     this.loadRegions();
 
@@ -228,7 +228,7 @@ export class SignupPage {
       if (this.regions) {
         if (this.loading) {
           await this.loading.dismiss();
-          this.loading = null;
+          // this.loading = null;
         }
       }
       this.regions = await this.regions.sort((a, b) =>
@@ -237,15 +237,15 @@ export class SignupPage {
     });
   }
 
-  private getBarangays(municipalitycode): Observable<any[]> {
+  private getBarangays(municipalitycode : any): Observable<any[]> {
     return this.httpClient.get<any>("https://psgc.gitlab.io/api/cities-municipalities/" + municipalitycode + "/barangays/");
   }
 
-  private getMunicipalities(provincecode): Observable<any[]> {
+  private getMunicipalities(provincecode : any): Observable<any[]> {
     return this.httpClient.get<any[]>("https://psgc.gitlab.io/api/provinces/" + provincecode + "/cities-municipalities/");
   }
 
-  private getProvinces(regioncode): Observable<any[]> {
+  private getProvinces(regioncode : any): Observable<any[]> {
     return this.httpClient.get<any[]>("https://psgc.gitlab.io/api/regions/" + regioncode + "/provinces/");
   }
 
@@ -254,7 +254,7 @@ export class SignupPage {
   }
 
   async onRegionChange() {
-    let region = this.userForm.get("region").value;
+    let region = this.userForm.get("region")?.value;
     if (region.code) {
       await this.getProvinces(region.code).subscribe(async result => {
         this.loading = await this.loadingController.create({});
@@ -263,7 +263,7 @@ export class SignupPage {
         if (this.provinces) {
           if (this.loading) {
             await this.loading.dismiss();
-            this.loading = null;
+            // this.loading = null;
           }
         }
         this.provinces = await this.provinces.sort((a, b) =>
@@ -274,7 +274,7 @@ export class SignupPage {
   }
 
   async onProvinceChange() {
-    let province = this.userForm.get("province").value;
+    let province = this.userForm.get("province")?.value;
     if (province.code) {
       await this.getMunicipalities(province.code).subscribe(async result => {
         this.loading = await this.loadingController.create({});
@@ -283,7 +283,7 @@ export class SignupPage {
         if (this.municipalities) {
           if (this.loading) {
             await this.loading.dismiss();
-            this.loading = null;
+            // this.loading = null;
           }
         }
         this.municipalities = await this.municipalities.sort((a, b) =>
@@ -294,7 +294,7 @@ export class SignupPage {
   }
 
   async onMunicipalityChange() {
-    let municipality = this.userForm.get("municipality").value;
+    let municipality = this.userForm.get("municipality")?.value;
     if (municipality.code) {
       await this.getBarangays(municipality.code).subscribe(async result => {
         this.loading = await this.loadingController.create({});
@@ -303,7 +303,7 @@ export class SignupPage {
         if (this.barangays) {
           if (this.loading) {
             await this.loading.dismiss();
-            this.loading = null;
+            // this.loading = null;
           }
         }
         this.barangays = await this.barangays.sort((a, b) =>
@@ -332,17 +332,17 @@ export class SignupPage {
   }
 
 
-  matchValues(
-    matchTo: string // name of the control to match to
-  ): (AbstractControl) => ValidationErrors | null {
-    return (control: AbstractControl): ValidationErrors | null => {
-      return !!control.parent &&
-        !!control.parent.value &&
-        control.value === control.parent.controls[matchTo].value
-        ? null
-        : { isMatching: true };
-    };
-  }
+  // matchValues(
+  //   matchTo: string // name of the control to match to
+  // ): (AbstractControl) => ValidationErrors | null {
+  //   return (control: AbstractControl): ValidationErrors | null => {
+  //     return !!control.parent &&
+  //       !!control.parent.value &&
+  //       control.value === control.parent.controls[matchTo].value
+  //       ? null
+  //       : { isMatching: true };
+  //   };
+  // }
 
 
 }

@@ -108,6 +108,7 @@ export class LoginPage {
                   this.router.navigateByUrl("login/validationcode");
                   return true;
                 });
+                return true;
             }
           }
         }

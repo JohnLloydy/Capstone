@@ -1,9 +1,6 @@
 require('dotenv').config();
 
-// var User = require("../../models/user");
-// var Role = require("../../models/role");
-const {User, Role} = require("../../models/user");
-// const {User,Role} = require('../../models');
+const {User, Role} = require("../models/user");
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, SESSION_SECRET } =  process.env;
 

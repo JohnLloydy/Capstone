@@ -1,4 +1,4 @@
-const config = require("../expressconfig/config");
+const config = require("./expressconfig/config");
 const app = require("./server");
 const http = require("http");
 const server = http.createServer(app);

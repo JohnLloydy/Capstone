@@ -41,7 +41,7 @@ export class ValidationcodePage {
   }
 
   
-  async changePassword(validation) {
+  async changePassword(validation : any) {
     const alert = await this.alertController.create({
       header: 'Change Password',
       buttons: [
@@ -67,8 +67,9 @@ export class ValidationcodePage {
                     await this.appConfig.load();
                     await this.router.navigateByUrl("home");
                   });
-                  return true;
+                  
                 });
+                return true;
             }
 
             // this.userData.setMobileno(data.Mobileno);

@@ -21,7 +21,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 // import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 import { A2hsService } from './services/a2hs.service';
 
-export function jwtOptionsFactory(storage) {
+export function jwtOptionsFactory(storage : any) {
   const { host } = new URL(environment.backend);
   return {
     tokenGetter: () => {

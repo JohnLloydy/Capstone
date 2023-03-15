@@ -2,8 +2,8 @@ require("dotenv").config();
 
 var CRUDController = require("../controllers/crudcontroller");
 const sequelize = require("sequelize");
-var User = require("../../models/user");
-var Role = require("../../models/role");
+var User = require("../models/user");
+var Role = require("../models/role");
 
 var jwt = require("jsonwebtoken");
 const otpGen = require("otp-generator");
@@ -21,7 +21,6 @@ const { OAuth2Client } = require("google-auth-library");
 const client = new OAuth2Client({
   clientId: GOOGLE_CLIENT_ID,
 });
-
 
 // async function verify(token) {
 //   const ticket = await client.verifyIdToken({
@@ -74,17 +73,6 @@ class UserController extends CRUDController {
   constructor(model) {
     super(model);
   }
-
-  getAll = async (req, res) => {
-    try {
-        const items = await this.model.findAll({
-            include: Role
-        });
-        return res.status(200).json(items);
-    } catch (error) {
-        return res.status(500).send(error.message);
-    }
-  };
 
   getuserprofilebyid = async (req, res) => {
     try {
@@ -171,9 +159,9 @@ class UserController extends CRUDController {
           });
         });
     } else {
-      if (!req.body.mobileno || !req.body.password) {
+      if (!req.body.email || !req.body.password) {
         return res.status(400).send({
-          msg: "You need to send mobileno and password.",
+          msg: "You need to send email and password.",
         });
       }
 
@@ -186,7 +174,7 @@ class UserController extends CRUDController {
           },
         ],
         where: {
-          mobileno: req.body.mobileno,
+          email: req.body.email,
         },
       })
         .then(async function (user) {
@@ -252,7 +240,7 @@ class UserController extends CRUDController {
         }
       });
     } else {
-      if (!req.body.mobileno || !req.body.password) {
+      if (!req.body.email || !req.body.password) {
         return res.status(400).json({
           msg: "You need to send mobileno and password",
         });
@@ -261,7 +249,7 @@ class UserController extends CRUDController {
       //mysql
       User.findOne({
         where: {
-          mobileno: req.body.mobileno,
+          email: req.body.email,
         },
       })
         .then((user) => {
@@ -294,7 +282,7 @@ class UserController extends CRUDController {
     return jwt.sign(
       {
         id: user.id,
-        mobileno: user.mobileno,
+        email: user.email,
         role: user.role,
       },
       global.gConfig.jwtSecret,
@@ -306,7 +294,7 @@ class UserController extends CRUDController {
 
   resetPassword = async (req, res) => {
     try {
-      const { mobileno } = req.query;
+      const { email } = req.query;
       let curdate = new Date();
 
       let otpobj = {
@@ -329,7 +317,7 @@ class UserController extends CRUDController {
 
       const [updated] = await this.model.update(otpobj, {
         where: {
-          mobileno: mobileno,
+          email: email,
         },
       });
 

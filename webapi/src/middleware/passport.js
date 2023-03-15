@@ -1,5 +1,5 @@
-var User = require("../../models/user");
-var Role = require("../../models/role");
+var User = require("../models/user");
+var Role = require("../models/role");
 
 var JwtStrategy = require('passport-jwt').Strategy,
     ExtractJwt = require('passport-jwt').ExtractJwt;
