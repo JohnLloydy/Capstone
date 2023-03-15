@@ -96,7 +96,7 @@
   <ion-split-pane contentId="main-content">
     <ion-menu contentId="main-content">
       <ion-content>
-        <ion-title class="ion-padding">Bukidnon MIS Portal</ion-title>
+        <ion-title class="ion-padding">Ionic App</ion-title>
 
         <ion-accordion-group [value]="activemenu">
           <ion-accordion [value]="item.name" *ngFor="let item of appPages">
@@ -105,7 +105,7 @@
             <div slot="content" *ngFor="let child of item.childmenus">
               <ion-item
                 (click)="setActiveMenu(item.name)"
-                *ngIf="authService.checkRoles(child.role) || child.role === 'GUEST'"
+                *ngIf="authService.checkRoles(child.roles)"
                 [routerLink]="child.url"
                 routerLinkActive="selected"
                 routerDirection="root"

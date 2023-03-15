@@ -45,283 +45,13 @@ export class AppComponent implements OnInit {
           title: 'Home',
           url: 'home',
           icon: 'home',
-          role: 'GUEST',
-        },
-        //singit
-        {
-          title: 'PHO',
-          url: 'phodashboard',
-          icon: 'medkit',
-          role: 'GUEST',
-        },
-        {
-          title: 'COVID 19',
-          url: 'covid19',
-          icon: 'medical',
-          role: 'GUEST',
-        },
-        {
-          title: 'COVID19 (MUNICIPALITY)',
-          url: 'muncitycovid19dashboard',
-          icon: 'medical',
-          role: 'GUEST',
-        },
-        {
-          title: 'PHRMO-HRMIS',
-          url: 'phrmodashboard',
-          icon: 'people',
-          role: 'GUEST',
-        },
-        {
-          title: 'PSWDO-ASMIS',
-          url: 'pswdodashboard',
-          icon: 'accessibility',
-          role: 'GUEST',
+          roles:['admin','manager','user']
         },
         {
           title: 'About',
           url: 'about',
           icon: 'information-circle',
-          role: 'GUEST',
-        },
-      ],
-    },
-    // {
-    //   title: "Dashboard",
-    //   name: "dashboard",
-    //   childmenus: [
-    //     {
-    //       title: "PHO",
-    //       url: "phodashboard",
-    //       icon: "bar-chart",
-    //       role: "GUEST"
-    //     },
-    //     {
-    //       title: "PHO Municipality",
-    //       url: "muncitydashboard",
-    //       icon: "bar-chart",
-    //       role: "GUEST"
-    //     },
-    //     {
-    //       title: "HRMIS",
-    //       url: "phrmodashboard",
-    //       icon: "people",
-    //       role: "GUEST"
-    //     },
-    //     {
-    //       title: 'PSWDO',
-    //       url: 'pswdodashboard',
-    //       icon: 'bar-chart',
-    //       role: 'GUEST'
-    //     },
-
-    //   ]
-    // },
-    // hrmis
-
-    {
-      title: 'Tabulaton',
-      childmenus: [
-        {
-          title: 'Tabulation Dashboard',
-          url: '/app/tabs/tabulationhome',
-          icon: 'dice',
-          role: 'TABULATION',
-        },
-        {
-          title: 'Score Management',
-          url: '/app/tabs/scoremanagement',
-          icon: 'dice',
-          role: 'TABULATION',
-        },
-        {
-          title: 'Tabulation',
-          url: '/app/tabs/tabulation',
-          icon: 'pencil',
-          role: 'TABULATION',
-        },
-        {
-          title: 'Results',
-          url: '/app/tabs/results',
-          icon: 'list',
-          role: 'ADMIN',
-        },
-      ],
-    },
-    {
-      title: 'PHO ',
-      name: 'pho',
-      childmenus: [
-        // {
-        //   title: "Pre Vaccination Registration",
-        //   url: "prevac",
-        //   icon: "bandage",
-        // },
-        // ,
-        // {
-        //   title: 'PICTD Map Portal',
-        //   url: 'mapportal',
-        //   icon: 'map'
-        // },
-        // {
-        //   title: "Covid Map",
-        //   url: "maps",
-        //   icon: "map",
-        //   roles: ['admin', 'manager', 'user']
-        // },
-        {
-          title: 'Advisories',
-          url: 'advisories',
-          icon: 'newspaper',
-          role: 'GUEST',
-        },
-        // {
-        //   title: "Cases",
-        //   url: "cases",
-        //   icon: "people",
-        // },
-        // {
-        //   title: "Create QR Profile",
-        //   url: "qrprofile",
-        //   icon: "person-add",
-        // },
-        // {
-        //   title: "QR Profile List",
-        //   url: "qrprofilelist",
-        //   icon: "list",
-        // },
-        // {
-        //   title: "QR Scan",
-        //   url: "scanqr",
-        //   icon: "barcode",
-        // },
-        // {
-        //   title: "QR Log List",
-        //   url: "qrloglist",
-        //   icon: "list",
-        // },
-        // {
-        //   title: "Vaccine Survey",
-        //   url: "vaccinesurvey",
-        //   icon: "medkit",
-        // },
-        // {
-        //   title: "Vaccine Dashboard",
-        //   url: "vaccinesurveydashboard",
-        //   icon: "bar-chart",
-        // },
-        {
-          title: 'Reports',
-          url: 'reportlist',
-          icon: 'list',
-          role: 'GUEST',
-        },
-
-        {
-          title: 'Covid Cases Profiles',
-          url: 'covidcaseprofilemanagement',
-          icon: 'document',
-          role: 'PHO',
-        },
-        {
-          title: 'Aliquoting',
-          url: 'covidcaseprofilealiquoting',
-          icon: 'document',
-          role: 'PHO',
-        },
-        // {
-        //   title: "Verify Profile",
-        //   url: "verifyprofile",
-        //   icon: "document",
-        //   roles: ['admin', 'manager', 'user']
-        // },
-        {
-          title: 'Cert Verification',
-          url: 'qrscanner',
-          icon: 'document',
-          role: 'PHO',
-        },
-
-        {
-          title: 'PIDSR Upload',
-          url: 'pidsr-upload',
-          icon: 'document',
-          role: 'PHO',
-        },
-      ],
-    },
-    // {
-    //   ////// pswdo///
-    //   title: "PSWDO",
-    //   name: "pswdo",
-    //   childmenus: [
-
-    //   ]
-    // },
-    {
-      ////// HCC///
-      title: 'Hospital Command Center',
-      name: 'hcc',
-      childmenus: [
-        {
-          title: 'Dashboard',
-          url: 'hccdashboard',
-          icon: 'pulse',
-          role: 'HCC',
-        },
-        {
-          title: 'Referrals',
-          url: 'referrals',
-          icon: 'fitness',
-          role: 'HCC',
-        },
-        {
-          title: 'Hospital Inventory',
-          url: 'healthfacility',
-          icon: 'medkit',
-          role: 'HCC',
-        },
-      ],
-    },
-    {
-      //Tabulation Master
-      title: 'Tabulation Master',
-      childmenus: [
-        {
-          title: 'Events',
-          url: 'events',
-          icon: 'document',
-          role: 'ADMIN',
-        },
-        {
-          title: 'Contestants',
-          url: 'contestants',
-          icon: 'document',
-          role: 'ADMIN',
-        },
-        {
-          title: 'Judges',
-          url: 'judges',
-          icon: 'document',
-          role: 'ADMIN',
-        },
-        {
-          title: 'Contests',
-          url: 'contests',
-          icon: 'document',
-          role: 'ADMIN',
-        },
-        {
-          title: 'Exposures',
-          url: 'exposures',
-          icon: 'document',
-          role: 'ADMIN',
-        },
-        {
-          title: 'Criterias',
-          url: 'criterias',
-          icon: 'document',
-          role: 'ADMIN',
+          roles:['admin','manager','user']
         },
       ],
     },
@@ -333,13 +63,13 @@ export class AppComponent implements OnInit {
           title: 'User Management',
           url: 'usermanagement',
           icon: 'people',
-          role: 'ADMIN',
+          roles:['admin']
         },
         {
           title: 'Role Management',
           url: 'rolemanagement',
           icon: 'key',
-          role: 'ADMIN',
+          roles:['admin']
         },
       ],
     },
@@ -446,7 +176,7 @@ export class AppComponent implements OnInit {
     return (
       parent.childmenus.filter(
         (item: any) =>
-          this.authService.checkRoles(item.role) || item.role === 'GUEST'
+          this.authService.checkRoles(item.roles)
       ).length > 0
     );
   }
