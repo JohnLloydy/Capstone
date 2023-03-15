@@ -1,4 +1,4 @@
-<ion-app [class.dark-theme]="dark">
+<!-- <ion-app [class.dark-theme]="dark">
   <ion-split-pane contentId="main-content">
     <ion-menu contentId="main-content">
       <ion-content>
@@ -89,6 +89,143 @@
       </ion-content>
     </ion-menu>
 
+    <ion-router-outlet id="main-content"></ion-router-outlet>
+  </ion-split-pane>
+</ion-app> -->
+<ion-app [class.dark]="dark" [class.dark-mode]="dark">
+  <ion-split-pane contentId="main-content">
+    <ion-menu contentId="main-content">
+      <ion-content>
+        <ion-title class="ion-padding">Bukidnon MIS Portal</ion-title>
+
+        <ion-accordion-group [value]="activemenu">
+          <ion-accordion [value]="item.name" *ngFor="let item of appPages">
+            <ion-item slot="header" *ngIf="hasChild(item)">{{ item.title }}</ion-item>
+            <!-- <tagabukid-pictd-nx-menucomponent slot="content" [item]="item"></tagabukid-pictd-nx-menucomponent> -->
+            <div slot="content" *ngFor="let child of item.childmenus">
+              <ion-item
+                (click)="setActiveMenu(item.name)"
+                *ngIf="authService.checkRoles(child.role) || child.role === 'GUEST'"
+                [routerLink]="child.url"
+                routerLinkActive="selected"
+                routerDirection="root"
+                detail="false"
+              >
+                <ion-icon
+                  slot="start"
+                  [ios]="child.icon + '-outline'"
+                  [md]="child.icon + '-sharp'"
+                ></ion-icon>
+                <ion-label>{{ child.title }}</ion-label>
+              </ion-item>
+            </div>
+          </ion-accordion>
+        </ion-accordion-group>
+        <!-- <ion-list id="menu-list" lines="none">
+          <ng-container *ngFor="let p of appPages">
+            <ion-list-header *ngIf="hasChild(p)">{{ p.title }}</ion-list-header>
+            <ion-menu-toggle
+              auto-hide="false"
+              *ngFor="let c of p.childmenus; let i = index"
+            >
+              <ion-item
+                *ngIf="authService.checkRoles(c.role) || c.role === 'GUEST'"
+                [routerLink]="c.url"
+                routerLinkActive="selected"
+                routerDirection="root"
+                detail="false"
+              >
+                <ion-icon
+                  slot="start"
+                  [ios]="c.icon + '-outline'"
+                  [md]="c.icon + '-sharp'"
+                ></ion-icon>
+                <ion-label>{{ c.title }}</ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+          </ng-container>
+        </ion-list> -->
+
+        <ion-list *ngIf="loggedIn" lines="none">
+          <ion-list-header>Account</ion-list-header>
+
+          <ion-menu-toggle autoHide="false">
+            <ion-item
+              button
+              routerLink="/myaccount"
+              routerLinkActive="selected"
+              routerDirection="root"
+              detail="false"
+            >
+              <ion-icon slot="start" name="person"></ion-icon>
+              <ion-label> My Account </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+
+          <ion-menu-toggle autoHide="false">
+            <ion-item button (click)="logout()" detail="false">
+              <ion-icon slot="start" name="log-out"></ion-icon>
+              <ion-label> Logout </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+          <!-- <ion-menu-toggle autoHide="false">
+            <ion-item>
+              <ion-icon slot="start" name="moon-outline"></ion-icon>
+              <ion-label> Dark Mode </ion-label>
+              <ion-toggle [(ngModel)]="dark"></ion-toggle>
+            </ion-item>
+          </ion-menu-toggle> -->
+        </ion-list>
+
+        <ion-list *ngIf="!loggedIn" lines="none">
+          <ion-list-header>Account </ion-list-header>
+
+          <ion-menu-toggle autoHide="false">
+            <ion-item
+              routerLink="/login"
+              routerLinkActive="selected"
+              routerDirection="root"
+              detail="false"
+            >
+              <ion-icon slot="start" name="log-in"></ion-icon>
+              <ion-label> Login </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+
+          <ion-menu-toggle autoHide="false">
+            <ion-item
+              routerLink="/signup"
+              routerLinkActive="active"
+              routerDirection="root"
+              detail="false"
+            >
+              <ion-icon slot="start" name="person-add"></ion-icon>
+              <ion-label> Signup </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list>
+        <ion-list id="labels-list">
+          <!-- <ion-list-header>Version: {{ appVersion }}</ion-list-header> -->
+           <ion-item>
+            <ion-icon slot="start" name="moon-outline"></ion-icon>
+            <ion-label>
+              Dark Mode
+            </ion-label>
+            <ion-toggle [(ngModel)]="dark"></ion-toggle>
+          </ion-item>
+        </ion-list>
+        <ion-list id="labels-list">
+          <!-- <ion-list-header *ngIf="syncserverstatus">Settings</ion-list-header>
+          <ion-list-header *ngIf="!syncserverstatus" 
+            >Settings (settings are only available online)</ion-list-header
+          > -->
+          <!-- <ion-item lines="none" [disabled]="!syncserverstatus">
+            <ion-label>Notification</ion-label>
+            <ion-toggle color="primary" [(ngModel)]="notificationsettings" (ionChange)="updateNotificationSetting()"></ion-toggle>
+          </ion-item> -->
+        </ion-list>
+      </ion-content>
+    </ion-menu>
     <ion-router-outlet id="main-content"></ion-router-outlet>
   </ion-split-pane>
 </ion-app>

@@ -18,8 +18,9 @@ import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
 // import { AngularFireAuthModule } from '@angular/fire/auth';
 // import { AngularFireModule } from '@angular/fire';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
-// import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
+import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 import { A2hsService } from './services/a2hs.service';
+const config: SocketIoConfig = { url: environment.backend, options: {} };
 
 export function jwtOptionsFactory(storage : any) {
   const { host } = new URL(environment.backend);
@@ -35,11 +36,6 @@ export function appInit(appConfigService: AppconfigService) {
   return () => appConfigService.load();
 }
 
-
-// const config: SocketIoConfig = {
-//   url: `${environment.backend}`,
-//   options: {}
-// };
 @NgModule({
   imports: [
     BrowserModule,
@@ -48,7 +44,7 @@ export function appInit(appConfigService: AppconfigService) {
     FormsModule,
     IonicModule.forRoot(),
     IonicStorageModule.forRoot(),
-    // SocketIoModule.forRoot(config),
+    SocketIoModule.forRoot(config),
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production
     }),

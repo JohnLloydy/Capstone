@@ -24,6 +24,7 @@
     "passport-jwt": "^4.0.1",
     "request": "^2.88.2",
     "sequelize": "^6.29.3",
+    "socket.io": "^4.6.1",
     "web-push": "^3.5.0"
   },
   "devDependencies": {

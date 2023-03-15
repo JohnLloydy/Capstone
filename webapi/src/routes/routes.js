@@ -17,13 +17,6 @@ require('./user.routes')(router,userAuth,checkRole);
 require('./role.routes')(router,userAuth,checkRole);
 
 
-router.get('/', (req, res, next) => {
-    const { user } = req;
-    res.render('home', { user });
-});
-
-
-
 module.exports = router;
 
 

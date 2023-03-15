@@ -1,0 +1,20 @@
+{
+  "development": {
+    "username": "root",
+    "password": "z7a18q",
+    "database": "ionictuts",
+    "host": "localhost",
+    "dialect": "mysql",
+    "jwtSecret": "love-one-another-not-another-one",
+    "webapp": "http://localhost:8100"
+  },
+  "production": {
+    "username": "root",
+    "password": "z7a18q",
+    "database": "ionictuts",
+    "host": "server host",
+    "dialect": "mysql",
+    "jwtSecret": "love-one-another-not-another-one",
+    "webapp":"https://appdomain.com"
+  }
+}
