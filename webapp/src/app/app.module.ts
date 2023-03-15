@@ -20,6 +20,7 @@ import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 import { A2hsService } from './services/a2hs.service';
+import { APP_CONFIG } from './app.config';
 const config: SocketIoConfig = { url: environment.backend, options: {} };
 
 export function jwtOptionsFactory(storage : any) {
@@ -78,7 +79,11 @@ export function appInit(appConfigService: AppconfigService) {
     // InAppBrowser,
     // SplashScreen,
     // StatusBar,
-    A2hsService
+    A2hsService,
+    { 
+      provide: APP_CONFIG, 
+      useValue: environment 
+    },
   ],
   bootstrap: [AppComponent]
 })

@@ -9,6 +9,7 @@ import { AuthService } from './services/auth.service';
 import { Storage } from '@ionic/storage-angular';
 import { Socket } from 'ngx-socket-io';
 import { environment } from 'src/environments/environment';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -45,13 +46,13 @@ export class AppComponent implements OnInit {
           title: 'Home',
           url: 'home',
           icon: 'home',
-          roles:['admin','manager','user']
+          roles: ['admin', 'manager', 'user'],
         },
         {
           title: 'About',
           url: 'about',
           icon: 'information-circle',
-          roles:['admin','manager','user']
+          roles: ['admin', 'manager', 'user'],
         },
       ],
     },
@@ -63,13 +64,13 @@ export class AppComponent implements OnInit {
           title: 'User Management',
           url: 'usermanagement',
           icon: 'people',
-          roles:['admin']
+          roles: ['admin'],
         },
         {
           title: 'Role Management',
           url: 'rolemanagement',
           icon: 'key',
-          roles:['admin']
+          roles: ['admin'],
         },
       ],
     },
@@ -80,7 +81,7 @@ export class AppComponent implements OnInit {
   balance: any;
   subscribe = false;
   user: any;
-  
+
   constructor(
     private menu: MenuController,
     private platform: Platform,
@@ -148,35 +149,12 @@ export class AppComponent implements OnInit {
 
     this.checkLoginStatus();
     this.listenForLoginEvents();
-
-    // this.checkLoginStatus();
-    // this.listenForLoginEvents();
-
-    // this.swUpdate.available.subscribe(async res => {
-    //   const toast = await this.toastCtrl.create({
-    //     message: 'Update available!',
-    //     position: 'bottom',
-    //     buttons: [
-    //       {
-    //         role: 'cancel',
-    //         text: 'Reload'
-    //       }
-    //     ]
-    //   });
-
-    //   await toast.present();
-
-    //   toast
-    //     .onDidDismiss()
-    //     .then(() => this.swUpdate.activateUpdate())
-    //     .then(() => window.location.reload());
-    // });
   }
+
   hasChild(parent: any): boolean {
     return (
-      parent.childmenus.filter(
-        (item: any) =>
-          this.authService.checkRoles(item.roles)
+      parent.childmenus.filter((item: any) =>
+        this.authService.checkRoles(item.roles)
       ).length > 0
     );
   }
@@ -187,28 +165,6 @@ export class AppComponent implements OnInit {
         this.user = user;
       });
 
-      // this.appPages.forEach(parent => {
-      //   console.log(parent.childmenus.filter(item => this.checkRoles(item.roles) || item.roles.includes('user')).length)
-      // })
-
-      // this.userData.isLoggedIn().then(value => {
-      //   if (!value) {
-      //     this.logout();
-      //   }
-      // })
-
-      // this.authService.authenticationState.pipe(skip(1)).subscribe(state => {
-      //   // console.log(state);
-      //   if (state) {
-      //     // this.menu.enable(true);
-      //   } else {
-      //     console.log(this.userData.isLoggedIn());
-      //     if (this.userData.isLoggedIn()){
-      //       this.logout();
-      //     }
-      //     // this.router.navigate(['dashboard']);
-      //   }
-      // });
     });
   }
 

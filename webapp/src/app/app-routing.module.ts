@@ -26,7 +26,7 @@ const routes: Routes = [
   {
     path: 'usermanagement',
     loadChildren: () => import('./pages/admin/usermanagement/usermanagement.module').then(m => m.UsermanagementPageModule),
-    canActivate: [AuthguardService],
+    canLoad: [AuthguardService],
     data: {
       roles: ['admin']
     }
@@ -34,7 +34,7 @@ const routes: Routes = [
   {
     path: 'rolemanagement',
     loadChildren: () => import('./pages/admin/rolemanagement/rolemanagement.module').then(m => m.RolemanagementPageModule),
-    canActivate: [AuthguardService],
+    canLoad: [AuthguardService],
     data: {
       roles: ['admin']
     }
@@ -42,7 +42,7 @@ const routes: Routes = [
   {
     path: 'myaccount',
     loadChildren: () => import('./pages/myaccount/myaccount.module').then(m => m.MyaccountPageModule),
-    canActivate: [AuthguardService],
+    canLoad: [AuthguardService],
     data: {
       roles: ['admin', 'manager', 'user']
     }

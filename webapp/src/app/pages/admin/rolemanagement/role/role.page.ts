@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  UntypedFormGroup,
-  UntypedFormBuilder,
-  Validators,
-} from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastController, AlertController } from '@ionic/angular';
-import { RoleService } from '../../../../services/role.service';
+import { RoleService } from 'src/app/services/role.service';
+
 
 @Component({
   selector: 'app-role',
@@ -17,9 +14,9 @@ export class RolePage {
   roleForm: UntypedFormGroup;
   validation_messages: any;
   mode: string;
-  isSubmitted: boolean | undefined;
-  defaultHref: string | undefined;
-  roleid: string | undefined;
+  isSubmitted: boolean;
+  defaultHref: string;
+  roleid: string;
   role: any;
   viewEntered = false;
 
@@ -28,7 +25,8 @@ export class RolePage {
     private formBuilder: UntypedFormBuilder,
     private toastController: ToastController,
     private router: Router,
-    private roleService: RoleService
+    private roleService: RoleService,
+    private alertController: AlertController,
   ) {
     this.roleForm = this.formBuilder.group({
       name: ['', Validators.compose([Validators.required])],
@@ -70,7 +68,7 @@ export class RolePage {
   }
 
   ionViewWillEnter() {
-    // this.roleid = this.route.snapshot.paramMap.get('roleid');
+    this.roleid = this.route.snapshot.paramMap.get('roleid') || "";
   }
 
   ionViewDidEnter() {

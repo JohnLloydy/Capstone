@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { ToastController } from '@ionic/angular';
+import { APP_CONFIG } from '../app.config';
 import { CrudService } from './crud.service';
 
 export interface Role {
@@ -15,7 +16,8 @@ export interface Role {
 })
 export class RoleService {
   crudService: CrudService<Role>;
-  constructor(protected http: HttpClient,protected toastController: ToastController) {
-    this.crudService = new CrudService<Role>(this.http,this.toastController, "roles");
+  apiUrl = `${this.appConfig.backend}/api/roles`;
+  constructor(@Inject(APP_CONFIG) private appConfig: any,protected http: HttpClient,protected toastController: ToastController) {
+    this.crudService = new CrudService<Role>(this.http,this.toastController, this.apiUrl);
   }
 }

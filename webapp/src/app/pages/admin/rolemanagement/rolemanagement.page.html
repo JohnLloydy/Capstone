@@ -4,26 +4,78 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>Role Management</ion-title>
+    <ion-button slot="end" (click)="create()" color="success"
+      >Create<ion-icon slot="end" name="add"></ion-icon>
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <nav class="navbar navbar-expand bg-lime">
+    <ion-item style="width: 40%">
+      <ion-label>Page Size</ion-label>
+      <ion-select [(ngModel)]="pagesize" (ionChange)="loadrows(page)">
+        <ion-select-option value="10">10</ion-select-option>
+        <ion-select-option value="20">20</ion-select-option>
+        <ion-select-option value="50">50</ion-select-option>
+        <ion-select-option value="100">100</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-searchbar
+      [(ngModel)]="searchtext"
+      (ionChange)="loadrows(page)"
+      placeholder="search"
+    ></ion-searchbar>
+  </nav>
   <div class="ion-padding">
-    <!-- <ngx-datatable
-      class="dark"
-      [limit]="8"
-      [rows]="rows"
-      [rowHeight]="50"
-      [columns]="columns"
-      [columnMode]="'force'"
-      [sortType]="'multi'"
-      [headerHeight]="50"
-      [footerHeight]="50"
-      [scrollbarH]="true"
-      [selected]="selected"
-      [selectionType]="'single'"
-      (select)="onSelect($event)"
-    >
+    <ngx-datatable
+    class="material"
+    [rows]="rows"
+    [rowHeight]="50"
+    [columns]="columns"
+    [columnMode]="ColumnMode.force"
+    [sortType]="SortType.multi"
+    [headerHeight]="50"
+    [footerHeight]="50"
+    [scrollbarH]="true"
+    [selected]="selected"
+    [selectionType]="SelectionType.single"
+    [externalPaging]="true"
+    [externalSorting]="true"
+    [count]="page.count"
+    [offset]="page.offset"
+    [limit]="page.limit"
+    (page)="loadrows($event)"
+    (select)="onSelect($event)"
+    [loadingIndicator]="loading"
+    (sort)="onSort($event)"
+  >
+      <ngx-datatable-column
+        name="Transactions"
+        [sortable]="false"
+        prop="id"
+        frozenLeft="true"
+        *ngIf="isAdmin()"
+      >
+        <ng-template
+          let-row="row"
+          let-value="value"
+          ngx-datatable-cell-template
+        >
+          <div class="btn-group">
+            <button
+              type="button"
+              class="btn btn-danger btn-sm"
+              (click)="$event.preventDefault(); $event.stopPropagation(); delete(value)"
+              data-toggle="tooltip"
+              data-placement="top"
+              title="Delete Record"
+            >
+              <i class="fas fa-trash"></i>
+            </button>
+          </div>
+        </ng-template>
+      </ngx-datatable-column>
       <ngx-datatable-column
         *ngFor="let column of columns; let i = index;"
         name="{{column.name}}"
@@ -35,15 +87,12 @@
           let-row="row"
           ngx-datatable-cell-template
         >
-          <span *ngIf="column.prop === 'screenshot';else others"
-            ><img [src]="value" width="300"
-          /></span>
-          <ng-template #others
-            >{{(column.prop === 'createdAt' ) ? (row.createdAt | date) :
-            value}}</ng-template
-          >
+          <span>
+            {{(['createdAt','updatedAt'].includes(column.prop)) ? (value | date)
+            : value}}
+          </span>
         </ng-template>
       </ngx-datatable-column>
-    </ngx-datatable> -->
+    </ngx-datatable>
   </div>
 </ion-content>

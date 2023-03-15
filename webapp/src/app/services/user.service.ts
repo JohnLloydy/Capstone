@@ -1,10 +1,11 @@
 import { Platform, AlertController, ToastController } from "@ionic/angular";
 import { HttpClient, HttpParams } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { Inject, Injectable } from "@angular/core";
 import { CrudService } from "./crud.service";
 import { environment } from "../../environments/environment";
 import { Observable } from "rxjs";
 import { catchError, tap } from "rxjs/operators";
+import { APP_CONFIG } from "../app.config";
 
 export interface User {
   id: BigInteger;
@@ -33,11 +34,11 @@ export interface User {
 })
 export class UserService {
   crudService: CrudService<User>;
-  constructor(protected http: HttpClient, protected toastController: ToastController, private alertController: AlertController) {
-    this.crudService = new CrudService<User>(this.http, this.toastController, "users");
+  apiUrl = `${this.appConfig.backend}/api`;
+  constructor(@Inject(APP_CONFIG) private appConfig: any,protected http: HttpClient,protected toastController: ToastController) {
+    this.crudService = new CrudService<User>(this.http, this.toastController, this.apiUrl + '/users');
   }
-
-  apiUrl = `${environment.backend}/api`;
+  
   getUserProfile(id: string): Observable<any> {
     return this.http.get<any>(this.apiUrl + '/userprofile/' + id).pipe(
       tap(res => {

@@ -1,22 +1,22 @@
 import { ToastController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
+import { Inject, Injectable, InjectionToken } from '@angular/core';
 import { Observable } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
-
 @Injectable({
   providedIn: 'root'
 })
 export class CrudService<T> {
-  protected readonly apiUrl = `${this.baseUrl}/api/${this.entityname}`;
+  // protected readonly apiUrl = `${this.baseUrl}/api/${this.entityname}`;
  
   constructor(
     protected readonly http: HttpClient,
     protected readonly toastController: ToastController,
-    @Inject(String) protected readonly entityname: string,
-    @Inject(String) protected readonly baseUrl: string = environment.backend,
+    @Inject(String) protected readonly apiUrl: string,
+    // @Inject(String) protected readonly entityname: string,
+    // @Inject(String) protected readonly baseUrl: string = environment.backend,
     
   ) { }
 
