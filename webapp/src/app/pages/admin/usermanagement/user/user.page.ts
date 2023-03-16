@@ -12,8 +12,8 @@ import {
   LoadingController,
 } from '@ionic/angular';
 import { Observable } from 'rxjs';
-import { RoleService } from '../../../../services/role.service';
-import { UserService } from '../../../../services/user.service';
+import { RoleService } from 'src/app/services/role.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-user',
@@ -21,23 +21,23 @@ import { UserService } from '../../../../services/user.service';
   styleUrls: ['./user.page.scss'],
 })
 export class UserPage {
-  regions: any[] | undefined;
-  provinces: any[] | undefined;
-  municipalities: any[] | undefined;
-  barangays: any[] | undefined;
+  regions: any[];
+  provinces: any[];
+  municipalities: any[];
+  barangays: any[];
   userForm: UntypedFormGroup;
   validation_messages: any;
   mode: string;
-  isSubmitted: boolean | undefined;
-  defaultHref: string | undefined;
-  roles: any[] | undefined;
-  userid: string | undefined;
+  isSubmitted: boolean;
+  defaultHref: string;
+  roles: any[];
+  userid: string;
   user: any;
   viewEntered = false;
   confirmpassword: any;
   password: any;
-  elementType: 'img' | undefined;
-  loading: HTMLIonLoadingElement | undefined;
+  elementType: 'img';
+  loading: HTMLIonLoadingElement;
 
   constructor(
     private userService: UserService,
@@ -335,7 +335,7 @@ export class UserPage {
   }
 
   ionViewWillEnter() {
-    // this.userid = this.route.snapshot.paramMap.get('userid');
+    this.userid = this.route.snapshot.paramMap.get('userid') || "";
   }
 
   async ionViewDidEnter() {

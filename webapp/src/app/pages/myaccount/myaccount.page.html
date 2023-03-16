@@ -44,13 +44,8 @@
               <h3>{{user?.name}}</h3>
             </div>
             <div id="{{user?.id}}">
-              <!-- <ngx-qrcode
-                [elementType]="elementType"
-                [value]="user?.qrdata | json"
-                [width]="250"
-                errorCorrectionLevel="L"
-              >
-              </ngx-qrcode> -->
+              <ngx-qrcode [value]="user?.qrdata | json" [width]="250">
+              </ngx-qrcode>
             </div>
           </ion-label>
         </ion-item>
@@ -135,15 +130,23 @@
       </ng-container>
     </div>
 
-    <ion-item>
-      <ion-label position="floating">Birth Date</ion-label>
-      <ion-datetime
-        displayFormat="MM/DD/YYYY"
-        formControlName="birthdate"
-        placeholder="Select Date"
-      >
-      </ion-datetime>
-    </ion-item>
+    <ion-accordion-group>
+      <ion-accordion value="start">
+        <ion-item slot="header">
+          <ion-label>Birth Date</ion-label>
+          <ion-note slot="end"
+            >{{personInformationForm.get('birthdate')?.value | date}}</ion-note
+          >
+        </ion-item>
+        <ion-datetime
+          slot="content"
+          displayFormat="MMMM YY"
+          formControlName="birthdate"
+          size="cover"
+          presentation="date"
+        ></ion-datetime>
+      </ion-accordion>
+    </ion-accordion-group>
     <div *ngFor="let validation of validation_messages.birthdate">
       <ng-container
         *ngIf="(isSubmitted && personInformationForm.get('birthdate')?.hasError(validation.type)) || (personInformationForm.get('birthdate')?.hasError(validation.type) && (personInformationForm.get('birthdate')?.dirty || personInformationForm.get('birthdate')?.touched))"
@@ -295,7 +298,13 @@
         <small class="text-danger">{{ validation.message }}</small>
       </ng-container>
     </div>
-    <button type="button" class="btn-block btn-success btn-lg" (click)="onSave()">Save</button>
+    <button
+      type="button"
+      class="btn-block btn-success btn-lg"
+      (click)="onSave()"
+    >
+      Save
+    </button>
     <p>&nbsp;</p>
   </form>
 </ion-content>

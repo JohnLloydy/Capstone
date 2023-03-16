@@ -119,7 +119,10 @@
               },
               "src/manifest.webmanifest"
             ],
-            "styles": ["src/theme/variables.scss", "src/global.scss"],
+            "styles": [
+            "src/theme/variables.scss", 
+            "src/global.scss"
+         ],
             "scripts": [
               "node_modules/admin-lte/plugins/jquery/jquery.min.js",
               "node_modules/admin-lte/plugins/jquery-ui/jquery-ui.min.js",

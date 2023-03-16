@@ -31,13 +31,10 @@
         <h3>{{user?.name}}</h3>
       </div>
       <div id="{{user?.id}}">
-        <!-- <ngx-qrcode
-          [elementType]="elementType"
+        <ngx-qrcode
           [value]="user?.qrdata | json"
-          [width]="250"
-          errorCorrectionLevel="L"
-        >
-        </ngx-qrcode> -->
+          [width]="250">
+        </ngx-qrcode>
       </div>
     </ion-label>
   </ion-item>
@@ -161,16 +158,35 @@
         <small class="text-danger">{{ validation.message }}</small>
       </ng-container>
     </div>
-
-    <ion-item>
-      <ion-label position="floating">Birth Date</ion-label>
-      <ion-datetime
-        displayFormat="MM/DD/YYYY"
-        formControlName="birthdate"
-        placeholder="Select Date"
-      >
-      </ion-datetime>
+    <ion-accordion-group>
+      <ion-accordion value="start">
+        <ion-item slot="header">
+          <ion-label>Birth Date</ion-label>
+          <ion-note slot="end">{{userForm.get('birthdate')?.value | date}}</ion-note>
+        </ion-item>
+        <ion-datetime
+          slot="content"
+          displayFormat="MMMM YY"
+          formControlName="birthdate"
+          size="cover"
+          presentation="date"
+        ></ion-datetime>
+      </ion-accordion>
+    </ion-accordion-group>
+    <!-- <ion-item id="open-modal">
+      <ion-label>Birth Date</ion-label>
+      <ion-note slot="end">{{userForm.get('birthdate')?.value | date}}</ion-note>
     </ion-item>
+    <ion-modal trigger="open-modal" [cssClass]="'center'">
+      <ng-template>
+        <ion-datetime
+        displayFormat="MM/DD/YYYY"
+          presentation="date"
+          formControlName="birthdate"
+          size="cover"
+        ></ion-datetime>
+      </ng-template>
+    </ion-modal> -->
     <div *ngFor="let validation of validation_messages.birthdate">
       <ng-container
         *ngIf="(isSubmitted && userForm.get('birthdate')?.hasError(validation.type)) || (userForm.get('birthdate')?.hasError(validation.type) && (userForm.get('birthdate')?.dirty || userForm.get('birthdate')?.touched))"
