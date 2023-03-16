@@ -7,8 +7,9 @@ import { UserData } from './providers/user-data';
 import { AppconfigService } from './services/appconfig.service';
 import { AuthService } from './services/auth.service';
 import { Storage } from '@ionic/storage-angular';
-import { Socket } from 'ngx-socket-io';
+// import { Socket } from 'ngx-socket-io';
 import { environment } from 'src/environments/environment';
+import { WebSocketService } from './services/websocket.service';
 
 @Component({
   selector: 'app-root',
@@ -16,26 +17,6 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  // public appPages = [
-  //   {
-  //     title: 'User Management',
-  //     url: 'usermanagement',
-  //     icon: 'people',
-  //     roles:['admin']
-  //   },
-  //   {
-  //     title: 'Role Management',
-  //     url: 'rolemanagement',
-  //     icon: 'key',
-  //     roles:['admin']
-  //   },
-  //   {
-  //     title: 'About',
-  //     url: '/about',
-  //     icon: 'information-circle',
-  //     roles:['admin','manager','user']
-  //   },
-  // ];
   activemenu = '';
   public appPages = [
     {
@@ -93,22 +74,23 @@ export class AppComponent implements OnInit {
     private swUpdate: SwUpdate,
     private toastCtrl: ToastController,
     public authService: AuthService,
-    private socket: Socket,
+    // private socket: Socket,
     // private swPush: SwPush,
     // private pushService: PushnotificationService,
+    private socketSvc:WebSocketService,
     private appConfig: AppconfigService
   ) {
     this.initializeApp();
   }
 
   async ngOnInit() {
+    // this.socketSvc.listen('users').subscribe((data: any) => {
+    //   console.log(data);
+    // });
+
     this.storage.get('activemenu').then((item) => {
       this.activemenu = item;
     });
-    console.log(this.activemenu);
-    // this.socket.on('sms', (params: any) => {
-    //   console.log(params.message);
-    // });
 
     this.swUpdate.versionUpdates.subscribe(async (evt) => {
       switch (evt.type) {
