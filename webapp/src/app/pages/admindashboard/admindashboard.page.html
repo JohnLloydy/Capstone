@@ -36,16 +36,16 @@
         <div class="col-lg-3 col-6">
           <div class="small-box bg-success">
             <div class="inner">
-              <h3>53<sup style="font-size: 20px">%</sup></h3>
+              <h3>{{ sensordata }}</h3>
 
-              <p>Bounce Rate</p>
+              <p>Sensor Data</p>
             </div>
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
             </div>
           </div>
         </div>
-        <div class="col-lg-3 col-6">
+        <!-- <div class="col-lg-3 col-6">
           <div class="small-box bg-warning">
             <div class="inner">
               <h3>44</h3>
@@ -68,6 +68,16 @@
               <i class="ion ion-pie-graph"></i>
             </div>
           </div>
+        </div> -->
+      </div>
+      <div class="row">
+        <div class="col-lg-12 col-12">
+          <line-chart
+            *ngIf="linechart_loaded"
+            [_lineChartDataLabels]="linechartlabel"
+            [_lineChartDataDatasets]="linechartdataset"
+            [_lineChartOptions]="linechartoptions"
+          ></line-chart>
         </div>
       </div>
       <div class="row">

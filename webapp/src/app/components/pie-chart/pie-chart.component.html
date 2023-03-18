@@ -1,0 +1,29 @@
+<div style="height: 100%">
+  <!-- <canvas baseChart 
+    [data]="pieChartData" 
+    [type]="pieChartType"
+    [options]="pieChartOptions"
+    [plugins]="pieChartPlugins">
+  </canvas> -->
+  <canvas
+    baseChart
+    [type]="'pie'"
+    [datasets]="pieChartDatasets"
+    [labels]="pieChartLabels"
+    [options]="pieChartOptions"
+    [plugins]="pieChartPlugins"
+    [legend]="pieChartLegend"
+  >
+  </canvas>
+</div>
+
+<!-- <div style="height: 100%;">
+  <canvas baseChart 
+    [data]="pieChartData" 
+    [labels]="pieChartLabels" 
+    [chartType]="pieChartType"
+    [options]="pieChartOptions"
+    [plugins]="pieChartPlugins"
+    [legend]="pieChartLegend">
+  </canvas>
+</div> -->

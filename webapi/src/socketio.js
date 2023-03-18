@@ -27,8 +27,7 @@ module.exports = function (io) {
     });
 
     socket.on("distanceInch", (data) => {
-      console.log(data);
-      socket.emit("iotdata", data);
+      socket.broadcast.emit("iotdata", data);
     });
 
     socket.on("getusers", () => {

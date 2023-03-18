@@ -8,6 +8,7 @@ import { AdmindashboardPageRoutingModule } from './admindashboard-routing.module
 
 import { AdmindashboardPage } from './admindashboard.page';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { ChartComponentsModule } from 'src/app/components/chartcomponents.module';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     FormsModule,
     IonicModule,
     AdmindashboardPageRoutingModule,
-    NgxDatatableModule
+    NgxDatatableModule,
+    ChartComponentsModule
   ],
   declarations: [AdmindashboardPage]
 })
