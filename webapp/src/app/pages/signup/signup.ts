@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { NgForm, Validators, UntypedFormBuilder, ValidationErrors, AbstractControl, UntypedFormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { UserData } from '../../providers/user-data';
@@ -10,7 +9,8 @@ import {GoogleAuth} from '@codetrix-studio/capacitor-google-auth';
 
 import { AuthService } from '../../services/auth.service';
 import { MenuController } from '@ionic/angular';
-
+import { CustomValidators } from './custom-validator';
+import { FormGroup, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'page-signup',
   templateUrl: 'signup.html',
@@ -31,34 +31,57 @@ export class SignupPage {
     private formBuilder: UntypedFormBuilder
   ) {
 
-    this.SignUpForm = this.formBuilder.group({
-      name: [
-        "",
-        Validators.compose([Validators.maxLength(100), Validators.required]),
-      ],
-      mobileno: [
-        "",
-        Validators.compose([
-          Validators.pattern("^[0-9]*$"),
-          Validators.maxLength(11),
-          Validators.required,
-        ]),
-      ],
-      email: [
-        "",
-        Validators.compose([
-          Validators.required,
-          Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")
-        ])
-      ],
-      password: [undefined, [Validators.required]],
-      passwordconfirm: [undefined,
-        [
-          Validators.required,
-          // this.matchValues('password'),
+    this.SignUpForm = this.formBuilder.group(
+      {
+        name: [
+          "",
+          Validators.compose([Validators.maxLength(100), Validators.required]),
         ],
-      ],
-    });
+        mobileno: [
+          "",
+          Validators.compose([
+            Validators.pattern("^[0-9]*$"),
+            Validators.maxLength(11),
+            Validators.required,
+          ]),
+        ],
+        email: [
+          null,
+          Validators.compose([Validators.email, Validators.required])
+        ],
+        password: [
+          null,
+          Validators.compose([
+            Validators.required,
+            // check whether the entered password has a number
+            CustomValidators.patternValidator(/\d/, {
+              hasNumber: true
+            }),
+            // check whether the entered password has upper case letter
+            CustomValidators.patternValidator(/[A-Z]/, {
+              hasCapitalCase: true
+            }),
+            // check whether the entered password has a lower case letter
+            CustomValidators.patternValidator(/[a-z]/, {
+              hasSmallCase: true
+            }),
+            // check whether the entered password has a special character
+            CustomValidators.patternValidator(
+              /[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/,
+              {
+                hasSpecialCharacters: true
+              }
+            ),
+            Validators.minLength(8)
+          ])
+        ],
+        passwordconfirm: [null, Validators.compose([Validators.required])]
+      },
+      {
+        // check whether our password and confirm password match
+        validator: this.MustMatch('password', 'passwordconfirm'),
+      }
+    );
 
     this.validation_messages = {
       name: [
@@ -84,6 +107,10 @@ export class SignupPage {
       ],
       password: [
         { type: "required", message: "Password is required." },
+        { type: "minlength", message: " Must be at least 8 characters!" },
+        { type: "hasNumber", message: "Must contain at least 1 number!" },
+        { type: "hasCapitalCase", message: "Must contain at least 1 in Capital Case!" },
+        { type: "hasSpecialCharacters", message: "Must contain at least 1 Special Character!" },
       ],
       passwordconfirm: [
         { type: "required", message: "Password Confirm is required." },
@@ -91,8 +118,8 @@ export class SignupPage {
       ]
     };
 
-    this.SignUpForm.controls['password'].valueChanges.subscribe(() => {
-      this.SignUpForm.controls['passwordconfirm'].updateValueAndValidity();
+    this.SignUpForm.controls["password"].valueChanges.subscribe(() => {
+      this.SignUpForm.controls["passwordconfirm"].updateValueAndValidity();
     });
 
     this.defaultHref =
@@ -131,20 +158,27 @@ export class SignupPage {
     });
   }
 
-  // matchValues(
-  //   matchTo: string // name of the control to match to
-  // ): (arg0: AbstractControl) => ValidationErrors | null {
-  //   return (control: AbstractControl): ValidationErrors | null => {
-  //     return !!control.parent &&
-  //       !!control.parent.value &&
-  //       control.value === control.parent.controls[matchTo].value
-  //       ? null
-  //       : { isMatching: true };
-  //   };
-  // }
+  MustMatch(controlName: string, matchingControlName: string) {
+    return (formGroup: FormGroup) => {
+      const control = formGroup.controls[controlName];
+      const matchingControl = formGroup.controls[matchingControlName];
+
+      if (matchingControl.errors && !matchingControl.errors["mustMatch"]) {
+        // return if another validator has already found an error on the matchingControl
+        return;
+      }
+
+      // set error on matchingControl if validation fails
+      if (control.value !== matchingControl.value) {
+        matchingControl.setErrors({ mustMatch: true });
+      } else {
+        matchingControl.setErrors(null);
+      }
+    }
+  }
 
   ionViewDidEnter() {
-    // GoogleAuth.init();
+    GoogleAuth.initialize();
   }
 
 }

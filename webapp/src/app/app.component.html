@@ -105,7 +105,7 @@
             <div slot="content" *ngFor="let child of item.childmenus">
               <ion-item
                 (click)="setActiveMenu(item.name)"
-                *ngIf="authService.checkRoles(child.roles)"
+                *ngIf="authService.checkRoles(child.roles) || child.roles.includes('guest')"
                 [routerLink]="child.url"
                 routerLinkActive="selected"
                 routerDirection="root"

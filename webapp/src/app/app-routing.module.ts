@@ -50,6 +50,13 @@ const routes: Routes = [
   {
     path: 'about',
     loadChildren: () => import('./pages/about/about.module').then(m => m.AboutModule)
+  },
+  {
+    path: 'admindashboard',
+    loadChildren: () => import('./pages/admindashboard/admindashboard.module').then( m => m.AdmindashboardPageModule),
+    data: {
+      roles: ['admin']
+    }
   }
 ];
 

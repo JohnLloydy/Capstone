@@ -118,7 +118,7 @@ export class LoginPage {
   }
 
   ionViewDidEnter() {
-    // GoogleAuth.init();
+    GoogleAuth.initialize();
   }
 
   // ionViewWillEnter() {

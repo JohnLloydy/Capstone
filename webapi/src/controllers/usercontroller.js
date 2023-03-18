@@ -15,26 +15,13 @@ const { NodeSSH } = require("node-ssh");
 const ssh = new NodeSSH();
 var request = require('request');
 
+//google secrets
 const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, SESSION_SECRET } = process.env;
-
 const { OAuth2Client } = require("google-auth-library");
+
 const client = new OAuth2Client({
   clientId: GOOGLE_CLIENT_ID,
 });
-
-// async function verify(token) {
-//   const ticket = await client.verifyIdToken({
-//     idToken: token,
-//     audience: GOOGLE_CLIENT_ID, // Specify the CLIENT_ID of the app that accesses the backend
-//     // Or, if multiple clients access the backend:
-//     //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
-//   });
-//   const payload = ticket.getPayload();
-//   const userid = payload['sub'];
-//   // If request specified a G Suite domain:
-//   // const domain = payload['hd'];
-// }
-// verify().catch(console.error);
 
 async function verify(token) {
   const ticket = await client.verifyIdToken({
@@ -43,13 +30,10 @@ async function verify(token) {
     // Or, if multiple clients access the backend:
     //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
   });
-
   const payload = ticket.getPayload();
-
   if (payload) {
     return payload;
   }
-
   return null;
 }
 
@@ -57,10 +41,7 @@ function createToken(user) {
   return jwt.sign(
     {
       id: user.id,
-      mobileno: user.mobileno,
       email: user.email,
-      photo: user.photo,
-      name: user.name,
       role: user.role,
     },
     global.gConfig.jwtSecret,
@@ -180,7 +161,7 @@ class UserController extends CRUDController {
         .then(async function (user) {
           if (!(await user.validPassword(req.body.password))) {
             return res.status(400).json({
-              msg: "The mobileno and password don't match.",
+              msg: "The email and password don't match.",
             });
           } else {
             return res.status(200).json({

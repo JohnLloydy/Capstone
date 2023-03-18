@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { HomePageRoutingModule } from './home-routing.module';
+import { AdmindashboardPageRoutingModule } from './admindashboard-routing.module';
 
-import { HomePage } from './home.page';
+import { AdmindashboardPage } from './admindashboard.page';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 @NgModule({
@@ -14,9 +14,9 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     CommonModule,
     FormsModule,
     IonicModule,
-    HomePageRoutingModule,
+    AdmindashboardPageRoutingModule,
     NgxDatatableModule
   ],
-  declarations: [HomePage]
+  declarations: [AdmindashboardPage]
 })
-export class HomePageModule {}
+export class AdmindashboardPageModule {}

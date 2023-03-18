@@ -27,13 +27,19 @@ export class AppComponent implements OnInit {
           title: 'Home',
           url: 'home',
           icon: 'home',
-          roles: ['admin', 'manager', 'user'],
+          roles: ['guest'],
+        },
+        {
+          title: 'Admin Dashboard',
+          url: 'admindashboard',
+          icon: 'bar-chart',
+          roles: ['admin'],
         },
         {
           title: 'About',
           url: 'about',
           icon: 'information-circle',
-          roles: ['admin', 'manager', 'user'],
+          roles: ['guest'],
         },
       ],
     },
@@ -136,7 +142,7 @@ export class AppComponent implements OnInit {
   hasChild(parent: any): boolean {
     return (
       parent.childmenus.filter((item: any) =>
-        this.authService.checkRoles(item.roles)
+        this.authService.checkRoles(item.roles) || item.roles.includes('guest')
       ).length > 0
     );
   }

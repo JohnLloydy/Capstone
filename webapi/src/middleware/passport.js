@@ -6,10 +6,12 @@ var JwtStrategy = require('passport-jwt').Strategy,
 
 var opts = {
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-    secretOrKey: global.gConfig.jwtSecret
+    secretOrKey: global.gConfig.jwtSecret,
+ 
 }
 
 module.exports = new JwtStrategy(opts, function (jwt_payload, done) {
+  
     //mysql version
     User.findOne({
         where: {
