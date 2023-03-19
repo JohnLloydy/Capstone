@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MenuController, ToastController, ToastOptions } from '@ionic/angular';
 import { ColumnMode, SortType, SelectionType } from '@swimlane/ngx-datatable';
+import { BaseChartDirective } from 'ng2-charts';
+import { BehaviorSubject } from 'rxjs';
+import { LineChartComponent } from 'src/app/components/line-chart/line-chart.component';
 import { UserData } from 'src/app/providers/user-data';
 import { AuthService } from 'src/app/services/auth.service';
 import { WebSocketService } from 'src/app/services/websocket.service';
@@ -27,7 +30,11 @@ export class AdmindashboardPage implements OnInit {
   linechartdataset: any;
   linecharttype: any;
   linechartoptions: any;
-  sensordataarray: any;
+
+  livesensordata: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+  @ViewChild(LineChartComponent) child: LineChartComponent;
+  // @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
+  // @ViewChild(ChildCmp) child:ChildCmp;
 
   constructor(
     public menu: MenuController,
@@ -54,6 +61,7 @@ export class AdmindashboardPage implements OnInit {
       { prop: 'createdAt', name: 'CREATED AT', width: 100, format: 'date' },
       { prop: 'updatedAt', name: 'UPDATED AT', width: 100, format: 'date' },
     ];
+    this.generatelinechart();
   }
 
   ngOnInit() {
@@ -76,31 +84,88 @@ export class AdmindashboardPage implements OnInit {
       );
     });
     this.websocketsvc.listen('iotdata').subscribe((data: any) => {
-      console.log(data);
       this.sensordata = parseFloat(data);
-      this.sensordataarray.push(parseFloat(data));
+      const currentValue = this.livesensordata.value;
+      const newValue = [...currentValue, this.sensordata];
+      if (newValue.length > 20) {
+        newValue.shift();
+      }
+      this.livesensordata.next(newValue);
     });
-
-    this.generatelinechart();
   }
+
 
   async generatelinechart() {
     this.linechart_loaded = true;
-    this.linechartlabel = ['Sensor 1'];
+    this.linechartlabel = [
+      1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,21
+    ];
+    //
     this.linechartdataset = [
       {
-        data: this.sensordataarray,
-        label: 'Sensor 1',
+        data: [],
+        label: 'Series A',
         fill: true,
-        tension: 0.5,
+        tension: 1,
         borderColor: 'black',
-        backgroundColor: 'rgba(255,0,0,0.3)'
-      }
+        backgroundColor: 'rgba(255,0,0,0.3)',
+      },
     ];
+
+    // });
+
     this.linecharttype = 'line';
-    this.linechartoptions = {
-      responsive: false
+    this.linechartoptions =  {
+      elements: {
+        line: {
+          tension: 1
+        }
+      },
+      scales: {
+        // We use this empty structure as a placeholder for dynamic theming.
+        y:
+          {
+            position: 'left',
+          },
+        y1: {
+          position: 'right',
+          grid: {
+            color: 'rgba(255,0,0,0.3)',
+          },
+          ticks: {
+            color: 'red'
+          }
+        }
+      },
+  
+      plugins: {
+        legend: { display: true },
+        annotation: {
+          annotations: [
+            {
+              type: 'line',
+              scaleID: 'x',
+              value: 'March',
+              borderColor: 'orange',
+              borderWidth: 2,
+              label: {
+                display: true,
+                position: 'center',
+                color: 'orange',
+                content: 'LineAnno',
+                font: {
+                  weight: 'bold'
+                }
+              }
+            },
+          ],
+        }
+      }
     };
+    this.livesensordata.subscribe((data) => {
+      this.linechartdataset[0].data = data;
+      this.child?.updateChart();
+    });
   }
   async presentToast(opts: ToastOptions) {
     const toast = await this.toastController.create(opts);
