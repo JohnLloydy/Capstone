@@ -107,6 +107,7 @@ const User = db.define(
         user.password = await bcrypt.hash(user.password, salt);
       },
       beforeUpdate: async function (user) {
+        if (user._previousDataValues.password === user.password) return;
         const salt = await bcrypt.genSalt(10);
         user.password = await bcrypt.hash(user.password, salt);
       },

@@ -99,6 +99,19 @@ class UserController extends CRUDController {
           where: {
             id: id,
           },
+          attributes: [
+            "lastname",
+            "firstname",
+            "middlename",
+            "birthdate",
+            "gender",
+            "civilstatus",
+            "region_code",
+            "province_code",
+            "municipality_code",
+            "barangay_code",
+            "street",
+          ],
         });
         return res.status(200).json(updateditem);
       }
@@ -380,6 +393,7 @@ class UserController extends CRUDController {
 
       req.body.otp = null;
       req.body.otpexpiry = null;
+
       const [updated] = await this.model.update(req.body, {
         where: {
           otp: otp,

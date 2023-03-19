@@ -35,8 +35,8 @@
         />
       </div>
 
-      <h3 class="profile-username text-center">{{user.email}}</h3>
-      <h3 class="profile-username text-center">{{user.mobileno}}</h3>
+      <h3 class="profile-username text-center">{{user?.email}}</h3>
+      <h3 class="profile-username text-center">{{user?.mobileno}}</h3>
       <ul class="list-group list-group-unbordered mb-3">
         <ion-item (click)="printQR(user)" class="centeritem breakword">
           <ion-label>
