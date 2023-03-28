@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  backend :  "https://domain.com",
+  backend :  "http://10.10.31.210:3000",
   config: {
     apiKey: "AIzaSyAtsfGA6qDMjQ-SRj9GS8evxsiSugX5-1w",
     authDomain: "gamba-293608.firebaseapp.com",

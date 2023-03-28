@@ -8,7 +8,7 @@ const app = express();
 const pkg = require("../package.json");
 
 var corsOptions = {
-  origin: global.gConfig.webapp,
+  origin: "*",
 };
 app.use(cors(corsOptions));
 
