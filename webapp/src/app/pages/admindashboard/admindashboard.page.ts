@@ -94,11 +94,10 @@ export class AdmindashboardPage implements OnInit {
     });
   }
 
-
   async generatelinechart() {
     this.linechart_loaded = true;
     this.linechartlabel = [
-      1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,21
+      1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
     ];
     //
     this.linechartdataset = [
@@ -115,29 +114,28 @@ export class AdmindashboardPage implements OnInit {
     // });
 
     this.linecharttype = 'line';
-    this.linechartoptions =  {
+    this.linechartoptions = {
       elements: {
         line: {
-          tension: 1
-        }
+          tension: 1,
+        },
       },
       scales: {
         // We use this empty structure as a placeholder for dynamic theming.
-        y:
-          {
-            position: 'left',
-          },
+        y: {
+          position: 'left',
+        },
         y1: {
           position: 'right',
           grid: {
             color: 'rgba(255,0,0,0.3)',
           },
           ticks: {
-            color: 'red'
-          }
-        }
+            color: 'red',
+          },
+        },
       },
-  
+
       plugins: {
         legend: { display: true },
         annotation: {
@@ -154,13 +152,13 @@ export class AdmindashboardPage implements OnInit {
                 color: 'orange',
                 content: 'LineAnno',
                 font: {
-                  weight: 'bold'
-                }
-              }
+                  weight: 'bold',
+                },
+              },
             },
           ],
-        }
-      }
+        },
+      },
     };
     this.livesensordata.subscribe((data) => {
       this.linechartdataset[0].data = data;

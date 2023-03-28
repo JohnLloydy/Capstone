@@ -7,6 +7,14 @@ import { AuthService } from 'src/app/services/auth.service';
 import { WebSocketService } from 'src/app/services/websocket.service';
 import { environment } from 'src/environments/environment';
 import { Storage } from '@ionic/storage-angular';
+
+import { Geolocation } from '@capacitor/geolocation';
+
+const printCurrentPosition = async () => {
+  const coordinates = await Geolocation.getCurrentPosition();
+
+  console.log('Current position:', coordinates);
+};
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
@@ -41,7 +49,11 @@ export class HomePage implements OnInit {
     this.websocketsvc.emit('alertserver',"TEST");
 
     this.presentStackedToast('send alarm to server');
+
+    printCurrentPosition();
   }
+
+
 
   async presentToast(opts: ToastOptions) {
     const toast = await this.toastController.create(opts);

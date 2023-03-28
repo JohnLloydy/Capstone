@@ -21,6 +21,26 @@
     </ion-card-header>
     <ion-card-content>
       <div class="row">
+        <section class="col-lg-12 connectedSortable ui-sortable">
+          <div class="card bg-gradient-primary">
+            <div
+              class="card-header border-0 ui-sortable-handle"
+              style="cursor: move"
+            >
+              <h3 class="card-title">
+                <i class="fas fa-map-marker-alt mr-1"></i>
+                DEMO ALERT
+              </h3>
+            </div>
+            <div class="card-body">
+              <div style="height: 450px; text-align: center">
+                <app-olmap></app-olmap>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <div class="row">
         <div class="col-lg-3 col-6">
           <div class="small-box bg-info">
             <div class="inner">
@@ -79,9 +99,8 @@
             [_lineChartOptions]="linechartoptions"
           ></line-chart>
         </div>
-        
       </div>
-   
+
       <div class="row">
         <div class="col-lg-12 col-12">
           <ngx-datatable

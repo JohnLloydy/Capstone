@@ -9,6 +9,7 @@ import { AdmindashboardPageRoutingModule } from './admindashboard-routing.module
 import { AdmindashboardPage } from './admindashboard.page';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ChartComponentsModule } from 'src/app/components/chartcomponents.module';
+import { OLMapComponent } from 'src/app/components/olmap/olmap.component';
 
 @NgModule({
   imports: [
@@ -17,8 +18,8 @@ import { ChartComponentsModule } from 'src/app/components/chartcomponents.module
     IonicModule,
     AdmindashboardPageRoutingModule,
     NgxDatatableModule,
-    ChartComponentsModule
+    ChartComponentsModule,
   ],
-  declarations: [AdmindashboardPage]
+  declarations: [AdmindashboardPage, OLMapComponent],
 })
 export class AdmindashboardPageModule {}
