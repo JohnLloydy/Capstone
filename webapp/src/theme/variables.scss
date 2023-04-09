@@ -201,7 +201,7 @@ $dark-theme: mat.define-dark-theme((
    */
 
    .dark .ios  {
-    --ion-background-color: #000000;
+    --ion-background-color: #0e0e0f;
     --ion-background-color-rgb: 0, 0, 0;
 
     --ion-text-color: #ffffff;
@@ -244,7 +244,7 @@ $dark-theme: mat.define-dark-theme((
    */
 
    .dark .md {
-    --ion-background-color: #121212;
+    --ion-background-color: #bcd4e6;
     --ion-background-color-rgb: 18, 18, 18;
 
     --ion-text-color: #ffffff;
@@ -272,13 +272,13 @@ $dark-theme: mat.define-dark-theme((
     --ion-color-step-900: #e7e7e7;
     --ion-color-step-950: #f3f3f3;
 
-    --ion-item-background: #1e1e1e;
+    --ion-item-background: #3350b9;
 
     --ion-toolbar-background: #1f1f1f;
 
     --ion-tab-bar-background: #1f1f1f;
 
-    --ion-card-background: #1e1e1e;
+    --ion-card-background: #3350b9;
   }
 
  

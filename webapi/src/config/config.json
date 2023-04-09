@@ -1,8 +1,8 @@
 {
   "development": {
     "username": "root",
-    "password": "z7a18q",
-    "database": "ionictuts",
+    "password": "",
+    "database": "webappt347t339",
     "host": "localhost",
     "dialect": "mysql",
     "jwtSecret": "love-one-another-not-another-one",
@@ -10,8 +10,8 @@
   },
   "production": {
     "username": "root",
-    "password": "z7a18q",
-    "database": "ionictuts",
+    "password": "",
+    "database": "webappt347t339",
     "host": "server host",
     "dialect": "mysql",
     "jwtSecret": "love-one-another-not-another-one",
